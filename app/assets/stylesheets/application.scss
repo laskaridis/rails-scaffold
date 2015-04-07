@@ -1,3 +1,26 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.header {
+
+  padding-right: 15px;
+  padding-left: 15px;
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 1px solid #e5e5e5;
+    line-height: 40px;
+  }
+}
+
+#registration {
+  margin-top: 60px;
+}
+

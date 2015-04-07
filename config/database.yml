@@ -9,14 +9,16 @@ default: &default
 development:
   <<: *default
   database: scaffold_development
+  username: scaffold
+  password: scaffold
 
 test: &test
   <<: *default
   database: scaffold_test
+  username: scaffold
+  password: scaffold
 
 production:
   <<: *default
   database: scaffold_production
-
-cucumber:
-  <<: *test
+  username: scaffold

@@ -7,8 +7,35 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
 
-<%= yield %>
+    <div class="header clearfix">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation">
+            <%= link_to t('buttons.register'), register_path %>
+          </li>
+          <li role="presentation">
+          <a href="#"><%= t 'buttons.login' %></a>
+          <li>
+          <li role="presentation">
+          <a href="#">
+            <%= t 'button.cart' %>
+          </a>
+          </li>
+        </ul>
+      </nav>
+      <h3 class="text-muted">Project name</h3>
+    </div>
 
+    <div class="container main">
+      <%= render partial: "/flashes" %>
+      <%= yield %>
+    </div>
+
+    <div class="footer">
+      <p>(c) Comany 2015</p>
+    </div>
+  </div>
 </body>
 </html>

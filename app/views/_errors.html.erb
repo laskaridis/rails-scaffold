@@ -1,0 +1,10 @@
+<% unless model.errors.empty? %>
+  <div id="errors" class="alert alert-danger" role="alert">
+    <p><strong><%= t 'errors.title' %>:</strong></p>
+    <ul>
+      <% model.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
