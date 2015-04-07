@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
 gem 'pg'
+gem 'bootstrap-sass', '~> 3.3.4'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -12,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'delayed_job_active_record'
+gem 'email_validator'
 gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 
@@ -26,6 +28,5 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
-  gem 'email_validator'
 end
 
