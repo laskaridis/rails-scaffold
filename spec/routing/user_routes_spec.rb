@@ -1,5 +1,5 @@
 
-describe 'routes for users', type: :routing do
+describe 'routes for users' do
 
   it { expect(get: 'users').to_not be_routable }
   it { expect(post: 'users').to be_routable }

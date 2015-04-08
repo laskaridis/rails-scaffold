@@ -1,6 +1,5 @@
 
-
-describe "routes for sessions", type: :routing do
+describe "routes for sessions" do
 
   it { expect(get '/login').to be_routable }
   it { expect(delete '/logout').to be_routable }

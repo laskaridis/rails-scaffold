@@ -1,5 +1,5 @@
 
-describe SessionsController, type: :controller do
+describe SessionsController do
 
   describe "GET #new" do
     before { get :new }

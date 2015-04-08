@@ -1,4 +1,4 @@
-describe UsersController, type: :controller do
+describe UsersController do
 
   describe 'GET #new' do
     before { get :new }
