@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
     root 'storefront#index', as: 'storefront'
 
+    resource :session, only: [:create]
+    get '/login' => 'sessions#new', as: 'login'
+    delete '/logout' => 'sessions#destroy', as: 'logout'
+
     resources :users, only: [:create, :show, :edit, :update, :destroy]
     get '/register' => 'users#new', as: 'register'
   end

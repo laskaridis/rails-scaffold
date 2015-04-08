@@ -1,7 +1,15 @@
-<% if flash.any? %>
-  <div id="flash">
-    <% flash.each do |key, value| %>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
-  </div>
+<% if flash[:error].present? %>
+ <div id="message" class="alert alert-danger">
+   <p><%= flash[:error] %></p>
+ </div>
+<% end %>
+<% if flash[:warning].present? %>
+ <div id="message" class="alert alert-warning">
+   <p><%= flash[:warning] %></p>
+ </div>
+<% end %>
+<% if flash[:success].present? %>
+ <div id="message" class="alert alert-success">
+   <p><%= flash[:success] %></p>
+ </div>
 <% end %>

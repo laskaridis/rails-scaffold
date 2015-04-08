@@ -1,6 +1,8 @@
 en:
   headings:
     register: Register
+    login: Login
+    remember-me: Stay signed in
   labels:
     email: Email
     password: Password
@@ -15,9 +17,12 @@ en:
     login: Login
     cart: Cart
   links:
+    forgot-password: Forgot your password?
+    register: Register
     policies:
       terms: Terms of Use
       cookies: Cookies
       privacy: Privacy Policy
   errors:
     title: Please correct the following errors
+    login: Invalid email or password

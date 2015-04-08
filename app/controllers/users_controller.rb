@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = user_from_params
 
     if @user.save
+      login(@user)
       redirect_to storefront_path
     else
       render "new"
