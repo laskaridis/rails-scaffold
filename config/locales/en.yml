@@ -15,14 +15,14 @@ en:
   buttons:
     register: Register
     login: Login
+    logout: Logout
     cart: Cart
   links:
     forgot-password: Forgot your password?
-    register: Register
     policies:
       terms: Terms of Use
       cookies: Cookies
       privacy: Privacy Policy
   errors:
     title: Please correct the following errors
-    login: Invalid email or password
+    login: Sorry. The email or password you entered was incorrect.

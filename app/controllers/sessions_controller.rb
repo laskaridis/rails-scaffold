@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       login(user)
       redirect_to storefront_path
     else
-      flash.now[:error] = t('errors.login')
+      flash.now[:credentials] = t('errors.login')
       render action: "new", status: :unauthorized
     end
   end
