@@ -24,7 +24,17 @@ en:
       cookies: Cookies
       privacy: Privacy Policy
   warnings:
-    email: Welcome! You need to confirm your email address. We have sent you an email in the address you have specified.
+    email: "You need to verify your email address! We have sent you an email with a link.
+      Open the email and click in the attached link to complete your registration."
   errors:
     title: Please correct the following errors
     login: Sorry. The email or password you entered was incorrect.
+    verify_email:
+      expired: "Your email confirmation link has been expired. We have sent you an email
+        with a new link. Please visit your mailbox and click on the attacked link to 
+        complete your registration."
+  mailer:
+    verify_email:
+      opening: "Someone, hopefully you, registered as a user in our shop using this email. Click the following link
+        to verify that the email belongs to you:"
+      closing: If you didn't registered with us, ignore this email.

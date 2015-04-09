@@ -9,4 +9,5 @@ describe 'routes for users' do
   it { expect(put: 'users/1').to be_routable }
   it { expect(delete: 'users/1').to be_routable }
   it { expect(get: '/register').to be_routable }
+  it { expect(get: '/verify/token').to be_routable }
 end

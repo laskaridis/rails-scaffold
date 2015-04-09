@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   before_filter :redirect_logged_in_users, only: [:create, :new]
 
+  # GET /login
   def new
     @user = user_from_params
   end
 
+  # POST /users
   def create
     @user = user_from_params
 
@@ -32,7 +34,28 @@ class UsersController < ApplicationController
 
   end
 
+  # GET /verify/:token
+  def verify
+    user = find_user_by_email_confirmation_token
+    unless user.present?
+      redirect_to storefront_url and return
+    end
+
+    unless user.confirm_email
+      if user.email_confirmation_expired?
+        user.reset_email_confirmation_token
+        flash[:warning] = t('errors.verify_email.expired')
+      end
+    end
+
+    redirect_to storefront_url
+  end
+
   private
+
+  def find_user_by_email_confirmation_token
+    User.find_by_email_confirmation_token params[:token]
+  end
 
   def redirect_logged_in_users
     if logged_in?

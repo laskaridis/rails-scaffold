@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_password_change_token
-    self.password_change_token = generate_token
+    self.password_change_token = Token.new
     self.password_change_requested_at = DateTime.now
     self.password_changed_at = nil
     send_change_password_email
@@ -140,13 +140,8 @@ class User < ActiveRecord::Base
   end
 
   def generate_email_confirmation_token
-    self.email_confirmation_token = generate_token
+    self.email_confirmation_token = Token.new
     self.email_confirmation_requested_at = DateTime.now
     send_email_confirmation_email
-  end
-
-
-  def generate_token
-    SecureRandom.hex(20)
   end
 end

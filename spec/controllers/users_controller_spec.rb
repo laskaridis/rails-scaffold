@@ -69,4 +69,38 @@ describe UsersController do
       it { should redirect_to storefront_url }
     end
   end
+
+  describe 'GET #verify' do
+
+    context 'when no user cannot be found' do
+      before { get :verify, token: 'invalid' }
+
+      it { should redirect_to storefront_url }
+    end
+
+    context 'when email verification token has not expired' do
+      before do
+        @user = create(:user)
+        get :verify, token: @user.email_confirmation_token
+      end
+
+      it 'verifies user email' do
+        expect(@user).to be_email_confirmed
+      end
+      it { should redirect_to storefront_url }
+    end
+
+    context 'when email verification token has expired' do
+      before do
+        @user = create(:user)
+        get :verify, token: @user.email_confirmation_token
+      end
+
+      it 'resets the email confirmation token' do
+
+      end
+      it { should set_flash with(warning: t('errors.verify_email.expired')) }
+      it { should redirect_to storefront_url }
+    end
+  end
 end
