@@ -8,6 +8,15 @@
 </head>
 <body>
   <div class="container">
+    <% if logged_in? %>
+      <% unless current_user.email_confirmed? %>
+        <div id="email-confirmation-warning" class="alert alert-warning">
+          <p><%= t('warnings.email') %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="container">
 
     <div class="header clearfix">
       <nav>
