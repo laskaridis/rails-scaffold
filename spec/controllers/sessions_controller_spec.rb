@@ -62,4 +62,16 @@ describe SessionsController do
       end
     end
   end
+
+  describe 'GET #destroy' do
+    before do
+      login
+      get :destroy
+    end
+
+    it { should redirect_to storefront_url }
+    it { expect(controller).to_not be_logged_in }
+    it { expect(controller).to be_logged_out }
+    it { expect(controller.current_user).to be_nil }
+  end
 end

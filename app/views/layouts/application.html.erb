@@ -12,12 +12,18 @@
     <div class="header clearfix">
       <nav>
         <ul class="nav nav-pills pull-right">
-          <li role="presentation">
-            <%= link_to t('buttons.register'), register_path %>
-          </li>
-          <li role="presentation">
-            <%= link_to t('buttons.login'), login_path %>
-          <li>
+          <% if logged_out? %>
+            <li role="presentation">
+              <%= link_to t('buttons.register'), register_path %>
+            </li>
+            <li role="presentation">
+              <%= link_to t('buttons.login'), login_path %>
+            <li>
+          <% else %>
+            <li role="presentation">
+              <%= link_to t('buttons.logout'), logout_path %>
+            </li>
+          <% end %>
           <li role="presentation">
           <a href="#"><%= t 'button.cart' %></a>
           </li>
