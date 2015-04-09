@@ -33,7 +33,7 @@ module Authentication
   end
 
   def logged_in?
-    session[:user_id].present?
+    current_user.present?
   end
 
   def logged_out?

@@ -2,11 +2,24 @@
 describe SessionsController do
 
   describe "GET #new" do
-    before { get :new }
 
-    it { should respond_with(:success) }
-    it { should render_template(:new) }
-    it { should_not set_flash }
+    context 'when user is logged in' do
+      before { get :new }
+
+      it { should respond_with(:success) }
+      it { should render_template(:new) }
+      it { should_not set_flash }
+    end
+
+    context 'when user is logged in' do
+      before do
+        login
+        get :new
+      end
+
+      it { should redirect_to storefront_url }
+      it { should_not set_flash }
+    end
   end
 
   describe "POST #create" do

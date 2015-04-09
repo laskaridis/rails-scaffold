@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :redirect_logged_in_users, only: [:create, :new]
 
   def new
     @user = user_from_params
@@ -32,6 +33,12 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def redirect_logged_in_users
+    if logged_in?
+      redirect_to storefront_url
+    end
+  end
 
   def user_from_params
     User.new(user_params)
