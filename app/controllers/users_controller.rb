@@ -38,7 +38,9 @@ class UsersController < ApplicationController
   def verify
     user = find_user_by_email_confirmation_token
     if user.present?
-      unless user.confirm_email
+      if user.confirm_email
+        flash[:success] = I18n.t('successes.verify_email')
+      else
         user.reset_email_confirmation_token
         flash[:warning] = I18n.t('errors.verify_email.expired')
       end

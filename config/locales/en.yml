@@ -23,6 +23,8 @@ en:
       terms: Terms of Use
       cookies: Cookies
       privacy: Privacy Policy
+  successes:
+    verify_email: "Your email address is now verified."
   warnings:
     email: "You need to verify your email address! We have sent you an email with a link.
       Open the email and click in the attached link to complete your registration."

@@ -90,7 +90,7 @@ describe UsersController do
         expect(@user.reload).to be_email_confirmed
       end
       it { should redirect_to storefront_url }
-      it { should_not set_flash }
+      it { expect(flash[:success]).to eq I18n.t('successes.verify_email') }
     end
 
     context 'when email verification token has expired' do
