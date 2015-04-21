@@ -3,11 +3,13 @@
    <p><%= flash[:error] %></p>
  </div>
 <% end %>
+
 <% if flash[:warning].present? %>
  <div id="message" class="alert alert-warning">
    <p><%= flash[:warning] %></p>
  </div>
 <% end %>
+
 <% if flash[:success].present? %>
  <div id="message" class="alert alert-success">
    <p><%= flash[:success] %></p>
