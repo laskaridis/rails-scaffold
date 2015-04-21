@@ -37,14 +37,10 @@ class UsersController < ApplicationController
   # GET /verify/:token
   def verify
     user = find_user_by_email_confirmation_token
-    unless user.present?
-      redirect_to storefront_url and return
-    end
-
-    unless user.confirm_email
-      if user.email_confirmation_expired?
+    if user.present?
+      unless user.confirm_email
         user.reset_email_confirmation_token
-        flash[:warning] = t('errors.verify_email.expired')
+        flash[:warning] = I18n.t('errors.verify_email.expired')
       end
     end
 

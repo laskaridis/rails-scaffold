@@ -3,7 +3,7 @@ describe User do
 
   it { is_expected.to have_db_index(:email) }
   it { is_expected.to validate_presence_of(:email) }
-  it { is_expected.to validate_presence_of(:password) }
+  it { is_expected.to validate_presence_of(:password).on(:create) }
   it { is_expected.to allow_value("foo@example.co.uk").for(:email) }
   it { is_expected.to allow_value("foo@example.com").for(:email) }
   it { is_expected.to allow_value("foo+bar@example.com").for(:email) }

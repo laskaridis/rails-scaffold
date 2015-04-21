@@ -81,25 +81,39 @@ describe UsersController do
     context 'when email verification token has not expired' do
       before do
         @user = create(:user)
+        expect(@user).to_not be_email_confirmation_expired
+        expect(@user).to_not be_email_confirmed
         get :verify, token: @user.email_confirmation_token
       end
 
       it 'verifies user email' do
-        expect(@user).to be_email_confirmed
+        expect(@user.reload).to be_email_confirmed
       end
       it { should redirect_to storefront_url }
+      it { should_not set_flash }
     end
 
     context 'when email verification token has expired' do
       before do
-        @user = create(:user)
+        @user = create_user_with_expired_token
+        @old_token = @user.email_confirmation_token
         get :verify, token: @user.email_confirmation_token
       end
 
-      it 'resets the email confirmation token' do
-
+      def create_user_with_expired_token
+        user = create(:user)
+        config = Configuration.configuration
+        expiration_period = config.email_confirmation_expiration
+        user.email_confirmation_requested_at = (expiration_period + 1).hours.ago
+        user.save!
+        expect(user).to be_email_confirmation_expired
+        user
       end
-      it { should set_flash with(warning: t('errors.verify_email.expired')) }
+
+      it 'resets the email confirmation token' do
+        expect(@old_token).to_not eq @user.reload.email_confirmation_token
+      end
+      it { expect(flash[:warning]).to eq I18n.t('errors.verify_email.expired') }
       it { should redirect_to storefront_url }
     end
   end

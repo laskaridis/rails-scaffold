@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     presence: true,
     email: { strict_mode: true },
     uniqueness: { case_sensitive: true }
-  validates :password, presence: true
+  validates :password, presence: true, on: :create
 
   before_validation :normalize_email
   after_create :generate_email_confirmation_token
@@ -142,6 +142,8 @@ class User < ActiveRecord::Base
   def generate_email_confirmation_token
     self.email_confirmation_token = Token.new
     self.email_confirmation_requested_at = DateTime.now
+    save!
+
     send_email_confirmation_email
   end
 end
