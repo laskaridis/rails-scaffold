@@ -8,7 +8,12 @@ class User < ActiveRecord::Base
     presence: true,
     email: { strict_mode: true },
     uniqueness: { case_sensitive: true }
-  validates :password, presence: true, on: :create
+  validates :password,
+    presence: { on: :create },
+    confirmation: true
+  validates :password_confirmation,
+    presence: true,
+    if: :password
 
   before_validation :normalize_email
   after_create :generate_email_confirmation_token
@@ -83,6 +88,7 @@ class User < ActiveRecord::Base
     end
 
     self.password = new_password
+    self.password_confirmation = new_password
     self.password_changed_at = DateTime.now
     save!
   end

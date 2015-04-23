@@ -4,6 +4,7 @@ describe User do
   it { is_expected.to have_db_index(:email) }
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_presence_of(:password).on(:create) }
+  it { is_expected.to validate_confirmation_of(:password) }
   it { is_expected.to allow_value("foo@example.co.uk").for(:email) }
   it { is_expected.to allow_value("foo@example.com").for(:email) }
   it { is_expected.to allow_value("foo+bar@example.com").for(:email) }
@@ -240,8 +241,8 @@ describe User do
       it "does not generate same email confirmation token for users with same password" do
         allow(Time).to receive(:now).and_return(Time.now)
         password = "secret"
-        first_user = create(:user, password: password)
-        second_user = create(:user, password: password)
+        first_user = create(:user, password: password, password_confirmation: password)
+        second_user = create(:user, password: password, password_confirmation: password)
 
         expect(second_user.email_confirmation_token).not_to eq first_user.email_confirmation_token
       end
