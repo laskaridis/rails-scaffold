@@ -30,7 +30,7 @@
             <li>
           <% else %>
             <li role="presentation">
-              <%= link_to t('buttons.logout'), logout_path %>
+              <%= link_to t('buttons.logout'), logout_path, method: :delete %>
             </li>
           <% end %>
           <li role="presentation">

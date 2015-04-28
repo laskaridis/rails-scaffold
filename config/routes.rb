@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     resource :session, only: [:create]
     get '/login' => 'sessions#new', as: 'login'
-    get '/logout' => 'sessions#destroy', as: 'logout'
+    delete '/logout' => 'sessions#destroy', as: 'logout'
 
     resources :users, only: [:create, :show, :edit, :update, :destroy]
     get '/register' => 'users#new', as: 'register'

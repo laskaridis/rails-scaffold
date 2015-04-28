@@ -63,10 +63,10 @@ describe SessionsController do
     end
   end
 
-  describe 'GET #destroy' do
+  describe 'delete #destroy' do
     before do
       login
-      get :destroy
+      delete :destroy
     end
 
     it { should redirect_to storefront_url }
