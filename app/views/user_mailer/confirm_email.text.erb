@@ -1,1 +1,4 @@
-Confirm email
+<%= t('mailer.verify_email.opening') %>
+<%= link_to "Confirm your email", verify_email_url(token: @user.email_confirmation_token) %>
+
+<%= t('mailer.verify_email.closing') %>

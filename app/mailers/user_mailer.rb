@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     mail(
       from: ::Configuration.configuration.mailer_sender,
       to: @user.email,
-      subject: "Change password"
+      subject: t('mailer.change_password.subject')
     )
   end
 
@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
     mail(
       from: ::Configuration.configuration.mailer_sender,
       to: @user.email,
-      subject: "Confirm email"
+      subject: t('mailer.verify_email.subject')
     )
   end
 end

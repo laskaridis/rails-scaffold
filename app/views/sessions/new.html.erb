@@ -45,7 +45,7 @@
                 <button class="btn btn-default btn-primary" type="submit">
                   <%= t 'buttons.login' %>
                 </button>
-                <a href="#"><%= t 'links.forgot-password' %></a>
+                <%= link_to t('links.forgot-password'), new_password_path %>
               </div>
             </div>
           <% end %>

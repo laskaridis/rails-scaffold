@@ -24,5 +24,14 @@ FactoryGirl.define do
       password_change_token        { Token.new }
       password_change_requested_at { DateTime.now }
     end
+
+    trait :with_expired_password_change_token do
+      password_change_token { Token.new }
+      password_change_requested_at do
+        config = Configuration.configuration
+        expiration_period = config.password_change_expiration
+        (expiration_period + 1).hours.ago
+      end
+    end
   end
 end

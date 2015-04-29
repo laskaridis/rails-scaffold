@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def forgot_password
+    generate_password_change_token
+  end
+
   def change_password(new_password)
     if password_change_expired?
       generate_password_change_token
@@ -90,7 +94,7 @@ class User < ActiveRecord::Base
     self.password = new_password
     self.password_confirmation = new_password
     self.password_changed_at = DateTime.now
-    save!
+    save
   end
 
   def password_change_pending?
@@ -118,6 +122,7 @@ class User < ActiveRecord::Base
     self.password_change_token = Token.new
     self.password_change_requested_at = DateTime.now
     self.password_changed_at = nil
+    self.save!
     send_change_password_email
   end
 

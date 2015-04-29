@@ -15,6 +15,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'delayed_job_active_record'
 gem 'email_validator'
 gem 'unicorn'
+
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
@@ -23,6 +24,7 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails', '~> 4.2'
+  gem 'delayed_job_web'
 end
 
 group :test do

@@ -1,3 +1,6 @@
-<p>t('mailer.verify_email.opening')</p>
+<p>
+  <%= t('mailer.verify_email.opening') %>
+  <%= link_to "Confirm your email", verify_email_url(token: @user.email_confirmation_token) %>
+</p>
 
-<p>t('mailer.verify_email.closing')</p>
+<p><%= t('mailer.verify_email.closing') %></p>

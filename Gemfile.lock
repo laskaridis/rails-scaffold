@@ -64,6 +64,10 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
+    delayed_job_web (1.2.10)
+      activerecord (> 3.0.0)
+      delayed_job (> 2.0.3)
+      sinatra (>= 1.4.4)
     diff-lcs (1.2.5)
     email_validator (1.5.0)
       activemodel
@@ -100,6 +104,8 @@ GEM
       mini_portile (~> 0.6.0)
     pg (0.18.1)
     rack (1.6.0)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -159,6 +165,10 @@ GEM
       rdoc (~> 4.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     spring (1.3.3)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -202,6 +212,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   delayed_job_active_record
+  delayed_job_web
   email_validator
   factory_girl_rails (~> 4.2)
   jbuilder (~> 2.0)

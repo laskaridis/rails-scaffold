@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 col-md-offset-2 panel">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Change your password</h4>
+        </div>
+        <div class="panel-body">
+          <%= render partial: "/errors", locals: {model: @user} %>
+          <%= form_for :password,
+            url: password_path(@user, token: @user.password_change_token),
+            method: :put,
+            html: {class: 'form-horizontal'} do |form| %>
+            <div class="form-group <%= 'has-error' unless @user.errors[:password].empty? %>">
+              <%= form.label :password,
+                t('labels.password'),
+                class:'col-sm-2 control-label' %>
+              <div class="col-sm-7">
+                <%= form.password_field :password,
+                  class: "form-control",
+                  placeholder: t("placeholders.password") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-7">
+                <button class="btn btn-default btn-primary" type="submit">
+                  <%= t 'buttons.change_password' %>
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

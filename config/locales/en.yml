@@ -19,6 +19,7 @@ en:
     login: Login
     logout: Logout
     cart: Cart
+    change_password: Change my password
   links:
     forgot-password: Forgot your password?
     policies:
@@ -27,9 +28,14 @@ en:
       privacy: Privacy Policy
   successes:
     verify_email: "Your email address is now verified."
+    reset_email: "We just sent you an email to :email with
+      a link to reset your password."
+    password_changed: "Your password has been successfully changed."
   warnings:
     email: "You need to verify your email address! We have sent you an email with a link.
       Open the email and click in the attached link to complete your registration."
+    password_request_expired: "Your password change request has expired. Please provide 
+      your email and we will send you a new one."
   errors:
     title: Please correct the following errors
     login: Sorry. The email or password you entered was incorrect.
@@ -37,8 +43,15 @@ en:
       expired: "Your email confirmation link has been expired. We have sent you an email
         with a new link. Please visit your mailbox and click on the attacked link to 
         complete your registration."
+    reset_email_not_found: "Could not find the email that you specified."
   mailer:
     verify_email:
-      opening: "Someone, hopefully you, registered as a user in our shop using this email. Click the following link
-        to verify that the email belongs to you:"
-      closing: If you didn't registered with us, ignore this email.
+      subject: "Verify you email address"
+      opening: "Someone, hopefully you, registered as a user in our shop using this email.
+        Click the following link to verify that the email belongs to you:"
+      closing: "If you didn't registered with us, ignore this email."
+    change_password:
+      subject: "Change your password"
+      opening: "You receive this email because you requested to change your password.
+        Click the following link to go to a page where you can change your password:"
+      closing: "If you didn't requested to change your password, ignore this email."
