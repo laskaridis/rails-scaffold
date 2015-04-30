@@ -236,6 +236,31 @@ describe User do
     end
   end
 
+  describe "create" do
+
+    it "generates an email confirmation token" do
+      user = build(:user)
+      expect(user.email_confirmation_token).to be_nil
+      expect(user.email_confirmation_requested_at).to be_nil
+
+      user.save
+      expect(user.email_confirmation_token).to_not be_nil
+      expect(user.email_confirmation_requested_at).to_not be_nil
+    end
+
+    it "sends email confirmation email" do
+      user = build(:user)
+      mailer = double("UserMailer")
+      expect(mailer).to receive(:deliver_later).
+        with(queue: 'confirm_email_email')
+      expect(UserMailer).to receive(:confirm_email).
+        with(user).
+        and_return(mailer)
+
+      user.save
+    end
+  end
+
   describe "after_create_ callbacks" do
     describe "#generate_email_confirmation_token" do
       it "does not generate same email confirmation token for users with same password" do
@@ -248,7 +273,6 @@ describe User do
       end
     end
   end
-
 
   describe "email address normalization" do
     it "downcases the address and strips spaces" do
