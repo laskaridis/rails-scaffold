@@ -114,10 +114,6 @@ class User < ActiveRecord::Base
     DateTime.now > expires_at
   end
 
-  def reset_password_change_token
-    generate_password_change_token
-  end
-
   def generate_password_change_token
     self.password_change_token = Token.new
     self.password_change_requested_at = DateTime.now
