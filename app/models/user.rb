@@ -122,6 +122,16 @@ class User < ActiveRecord::Base
     send_change_password_email
   end
 
+  def generate_email_confirmation_token
+    unless email_confirmed?
+      self.email_confirmation_token = Token.new
+      self.email_confirmation_requested_at = DateTime.now
+      save!
+
+      send_email_confirmation_email
+    end
+  end
+
   private
 
   def send_change_password_email
@@ -144,13 +154,5 @@ class User < ActiveRecord::Base
 
   def normalize_email
     self.email = User.normalize_email(email)
-  end
-
-  def generate_email_confirmation_token
-    self.email_confirmation_token = Token.new
-    self.email_confirmation_requested_at = DateTime.now
-    save!
-
-    send_email_confirmation_email
   end
 end

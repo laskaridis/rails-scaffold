@@ -99,6 +99,63 @@ describe User do
     end
   end
 
+  describe '#generate_email_confirmation_token' do
+
+    context 'when user has not verified his email address' do
+      before { @user = create(:user) }
+
+      it 'changes email_confirmation_token' do
+        old_email_confirmation_token = @user.email_confirmation_token
+        @user.generate_email_confirmation_token
+        new_email_confirmation_token = @user.email_confirmation_token
+        expect(new_email_confirmation_token).to_not be_nil
+        expect(new_email_confirmation_token).to_not eq old_email_confirmation_token
+      end
+
+      it 'changes email_confirmation_requested_at' do
+        old_email_confirmation_requested_at = @user.email_confirmation_requested_at
+        @user.generate_email_confirmation_token
+        new_email_confirmation_requested_at = @user.email_confirmation_requested_at
+        expect(new_email_confirmation_requested_at).to_not be_nil
+        expect(new_email_confirmation_requested_at).to_not eq old_email_confirmation_requested_at
+      end
+
+      it 'sends a verification email' do
+        user = create(:user)
+        mailer = double("UserMailer")
+        expect(mailer).to receive(:deliver_later).
+          with(queue: 'confirm_email_email')
+        expect(UserMailer).to receive(:confirm_email).
+          with(user).
+          and_return(mailer)
+        user.generate_email_confirmation_token
+      end
+    end
+
+    context 'when user has verified his email address' do
+      before { @user = create(:user, :with_confirmed_email) }
+
+      it 'does not change email_confirmation_token' do
+        old_email_confirmation_token = @user.email_confirmation_token
+        @user.generate_email_confirmation_token
+        new_email_confirmation_token = @user.email_confirmation_token
+        expect(new_email_confirmation_token).to eq old_email_confirmation_token
+      end
+
+      it 'does not change email_confirmation_requested_at' do
+        old_email_confirmation_requested_at = @user.email_confirmation_requested_at
+        @user.generate_email_confirmation_token
+        new_email_confirmation_requested_at = @user.email_confirmation_requested_at
+        expect(new_email_confirmation_requested_at).to eq old_email_confirmation_requested_at
+      end
+
+      it 'does not send a verification email' do
+        expect(UserMailer).to_not receive(:confirm_email)
+        @user.generate_email_confirmation_token
+      end
+    end
+  end
+
   describe '#email_confirmed?' do
 
     it 'is true when email_confirmed_at is set' do
