@@ -5,6 +5,7 @@ end
 
 def login_as(user)
   @controller.login user
+  user
 end
 
 def logout
