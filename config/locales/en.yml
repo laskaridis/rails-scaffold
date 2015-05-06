@@ -6,14 +6,12 @@ en:
   labels:
     email: Email
     password: Password
-    password_confirmation: Password again
     newsletter: I want to receive notifications by email
     user-agreement: By clicking register, you confirm that you accept our
     and: and
   placeholders:
     email: Email address
     password: Password
-    password_confirmation: Password again
   buttons:
     register: Register
     login: Login

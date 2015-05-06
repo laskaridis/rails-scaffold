@@ -6,7 +6,6 @@ FactoryGirl.define do
   factory :user do
     email
     password 'password'
-    password_confirmation 'password'
 
     trait :with_confirmed_email do
       email_confirmation_token        { Token.new }

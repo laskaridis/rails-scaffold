@@ -8,7 +8,7 @@ describe User do
     end
 
     it "should build a valid user with just an overridden password" do
-      expect(build(:user, password: "test", password_confirmation: "test")).to be_valid
+      expect(build(:user, password: "test")).to be_valid
     end
 
     it "should build a valid user with confirmed email" do
