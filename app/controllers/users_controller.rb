@@ -66,6 +66,11 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.fetch(:user, {}).permit(:full_name, :email, :password)
+    params.fetch(:user, {}).permit(
+      :full_name,
+      :email,
+      :password,
+      :receive_email_notifications
+    )
   end
 end

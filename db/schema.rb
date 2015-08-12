@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812090336) do
+ActiveRecord::Schema.define(version: 20150812094021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,17 +33,18 @@ ActiveRecord::Schema.define(version: 20150812090336) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                                       null: false
-    t.string   "encrypted_password",              limit: 128, null: false
+    t.string   "email",                                                       null: false
+    t.string   "encrypted_password",              limit: 128,                 null: false
     t.string   "email_confirmation_token",        limit: 128
     t.datetime "email_confirmation_requested_at"
     t.datetime "email_confirmed_at"
     t.string   "password_change_token",           limit: 128
     t.datetime "password_change_requested_at"
     t.datetime "password_changed_at"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.string   "full_name"
+    t.boolean  "receive_email_notifications",                 default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
