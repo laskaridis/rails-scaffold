@@ -9,12 +9,14 @@ en:
     login: Login
     remember-me: Stay signed in
   labels:
+    full_name: Full name
     email: Email
     password: Password
     newsletter: I want to receive notifications by email
     user-agreement: By clicking register, you confirm that you accept our
     and: and
   placeholders:
+    full_name: Full name
     email: Email address
     password: Password
   buttons:
