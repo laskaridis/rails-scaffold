@@ -117,4 +117,73 @@ describe UsersController do
       it { should redirect_to storefront_url }
     end
   end
+
+  describe 'GET #edit' do
+
+    context 'when logged in' do
+      before do
+        login
+        get :edit
+      end
+
+      it { should respond_with :success }
+      it { should render_template :edit }
+      it { should_not set_flash }
+    end
+
+    context 'when not logged in' do
+      before { get :edit }
+
+      it { should redirect_to login_url }
+    end
+  end
+
+  describe 'PUT #update' do
+
+    context 'when logged in' do
+      before { @user = login }
+
+      context 'when parameters are valid' do
+        before do
+          @new_params = {
+            full_name: 'New Name',
+            receive_email_notifications: !@user.receive_email_notifications
+          }
+          put :update, id: @user.id, user: @new_params
+        end
+
+        it 'updates user' do
+          user = User.find(@user.id)
+          expect(user.full_name).to eq @new_params[:full_name]
+          expect(user.receive_email_notifications).to eq @new_params[:receive_email_notifications]
+        end
+
+        it { should redirect_to storefront_url }
+        it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
+      end
+
+      context 'when parameters are invalid' do
+        before do
+          @new_params = { full_name: nil }
+          put :update, id: @user.id, user: @new_params
+        end
+
+        it 'should not update user' do
+          user = User.find(@user.id)
+          expect(user.full_name).to eq @user.full_name
+        end
+
+        it { should render_template "edit" }
+      end
+    end
+
+    context 'when not logged in' do
+      before do
+        user = create :user
+        put :update, id: user.id
+      end
+
+      it { should redirect_to login_url }
+    end
+  end
 end

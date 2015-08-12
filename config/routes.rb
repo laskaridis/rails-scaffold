@@ -8,9 +8,11 @@ Rails.application.routes.draw do
     get '/login' => 'sessions#new', as: 'login'
     delete '/logout' => 'sessions#destroy', as: 'logout'
 
-    resources :users, only: [:create, :show, :edit, :update, :destroy]
+    resources :users, only: [:create, :destroy]
     get '/register' => 'users#new', as: 'register'
     get '/verify/:token' => 'users#verify', as: 'verify_email'
+    get '/users/edit' => 'users#edit', as: 'edit_user'
+    put '/users' => 'users#update', as: 'update_user'
 
     resources :passwords, only: [:create, :new, :edit, :update]
 

@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
   before_filter :redirect_logged_in_users, only: [:create, :new]
+  before_action :require_login, only: [:edit, :update]
 
   # GET /login
   def new
-    @user = user_from_params
+    @user = user_from_params_for_create
   end
 
   # POST /users
   def create
-    @user = user_from_params
+    @user = user_from_params_for_create
 
     if @user.save
       login(@user)
@@ -18,16 +19,26 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/edit
   def edit
-
+    @user = current_user
   end
 
   def show
 
   end
 
+  # PUT /users
   def update
+    user = current_user
 
+    user.update_attributes user_params_for_update
+    if user.save
+      flash[:success] = I18n.t('successes.profile_updated')
+      redirect_to storefront_path
+    else
+      render "edit"
+    end
   end
 
   def destroy
@@ -61,11 +72,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_from_params
-    User.new(user_params)
+  def user_from_params_for_create
+    User.new(user_params_for_create)
   end
 
-  def user_params
+  def user_params_for_update
+    params.fetch(:user, {}).permit(
+      :full_name,
+      :receive_email_notifications
+    )
+  end
+
+  def user_params_for_create
     params.fetch(:user, {}).permit(
       :full_name,
       :email,

@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="panel">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4><%= t 'edit_profile' %></h4>
+        </div>
+        <div class="panel-body">
+          <%= render partial: "/errors", locals: {model: @user} %>
+          <%= form_for @user, method: :put, url: update_user_path, html: {class: 'form-horizontal'}  do |form| %>
+            <div class="form-group <%= 'has-error' unless @user.errors[:full_name].empty? %>">
+              <%= form.label :full_name, t('labels.full_name'), class: 'col-sm-2 control-label' %>
+              <div class="col-sm-7">
+                <%= form.text_field :full_name,
+                  class: 'form-control',
+                  placeholder: t('placeholders.full_name'),
+                  autofocus: true %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-7">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="newsletter">
+                    <%= form.check_box :receive_email_notifications %>
+                    <%= t 'labels.newsletter' %>
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-7">
+                <button class="btn btn-default btn-primary" type="submit">
+                  <%= t 'buttons.update' %>
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

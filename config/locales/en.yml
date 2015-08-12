@@ -8,6 +8,7 @@ en:
     register: Register
     login: Login
     remember-me: Stay signed in
+    edit_profile: Edit profile
   labels:
     full_name: Full name
     email: Email
@@ -25,6 +26,8 @@ en:
     logout: Logout
     cart: Cart
     change_password: Change my password
+    update: Update
+    profile: Profile
   links:
     forgot-password: Forgot your password?
     policies:
@@ -36,6 +39,7 @@ en:
     reset_email: "We just sent you an email to :email with
       a link to reset your password."
     password_changed: "Your password has been successfully changed."
+    profile_updated: "Your profle has been updated."
   warnings:
     email: "You need to verify your email address! We have sent you an email with a link.
       Open the email and click in the attached link to complete your registration."
