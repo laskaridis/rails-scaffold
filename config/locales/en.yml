@@ -1,4 +1,9 @@
 en:
+  time:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
   headings:
     register: Register
     login: Login
