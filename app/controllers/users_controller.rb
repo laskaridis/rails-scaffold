@@ -79,6 +79,7 @@ class UsersController < ApplicationController
   def user_params_for_update
     params.fetch(:user, {}).permit(
       :full_name,
+      :gender,
       :time_zone,
       :birth_date,
       :receive_email_notifications

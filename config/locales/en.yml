@@ -16,6 +16,8 @@ en:
   october: October
   november: November
   december: December
+  male: Male
+  female: Female
   headings:
     register: Register
     login: Login

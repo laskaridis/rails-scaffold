@@ -17,6 +17,15 @@
                   autofocus: true %>
               </div>
             </div>
+            <div class="form-group <%= 'has-error' unless @user.errors[:gender].empty? %>">
+              <%= form.label :gender, t('labels.gender'), class: 'col-sm-2 control-label' %>
+              <div class="col-sm-7">
+                <%= form.select :gender,
+                  [['Male', t('male')], ['Female', t('female')]],
+                  { include_blank: true },
+                  { class: 'form-control' } %>
+              </div>
+            </div>
             <div class="form-group <%= 'has-error' unless @user.errors[:time_zone].empty? %>">
               <%= form.label :time_zone, t('labels.time_zone'), class: 'col-sm-2 control-label' %>
               <div class="col-sm-7">
