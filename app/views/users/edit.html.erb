@@ -26,6 +26,34 @@
                   { class: 'form-control' } %>
               </div>
             </div>
+            <div class="form-group <%= 'has-error' unless @user.errors[:birth_date].empty? %>">
+              <%= form.label :birth_date, t('labels.birth_date'), class: 'col-sm-2 control-label' %>
+              <div class="col-sm-7">
+                <%= form.date_select :birth_date, {
+                  start_year: Date.current.year - 100,
+                  end_year: Date.current.year - 18,
+                  use_month_names: [
+                    t('january'),
+                    t('february'),
+                    t('march'),
+                    t('april'),
+                    t('may'),
+                    t('june'),
+                    t('july'),
+                    t('august'),
+                    t('september'),
+                    t('october'),
+                    t('november'),
+                    t('december')
+                  ],
+                  prompt: {
+                    day: t('labels.birth_date_day'),
+                    month: t('labels.birth_date_month'),
+                    year: t('labels.birth_date_year')
+                  },
+                }, { class: 'form-control' } %>
+            </div>
+            </div>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-7">
                 <div class="checkbox">
@@ -37,7 +65,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-7">
                 <button class="btn btn-default btn-primary" type="submit">

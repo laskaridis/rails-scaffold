@@ -80,6 +80,7 @@ class UsersController < ApplicationController
     params.fetch(:user, {}).permit(
       :full_name,
       :time_zone,
+      :birth_date,
       :receive_email_notifications
     )
   end

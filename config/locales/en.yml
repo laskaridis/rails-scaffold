@@ -4,6 +4,18 @@ en:
       default: "%d/%m/%Y"
       short: "%b %d"
       long: "%B %d, %Y"
+  january: January
+  february: February
+  march: March
+  april: April
+  may: May
+  june: June
+  july: July
+  august: August
+  september: September
+  october: October
+  november: November
+  december: December
   headings:
     register: Register
     login: Login
@@ -17,6 +29,10 @@ en:
     user-agreement: By clicking register, you confirm that you accept our
     and: and
     time_zone: Time zone
+    birth_date: Birth date
+    birth_date_day: Day
+    birth_date_month: Month
+    birth_date_year: Year
   placeholders:
     full_name: Full name
     email: Email address
