@@ -81,6 +81,7 @@ class UsersController < ApplicationController
       :full_name,
       :gender,
       :country_id,
+      :currency_id,
       :time_zone,
       :birth_date,
       :receive_email_notifications

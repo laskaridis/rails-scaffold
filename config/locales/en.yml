@@ -269,6 +269,12 @@ en:
     cw: "Curacao"
     sx: "Sint Maarten (Dutch part)"
     bq: "Bonaire, Sint Eustatius and Saba (BQ, BES)"
+  currencies:
+    eur: "Euro"
+    usd: "US Dollar"
+    gbp: "British pound"
+    jpy: "Yen"
+    rub: "Ruble"
   headings:
     register: Register
     login: Login
@@ -287,6 +293,7 @@ en:
     birth_date_month: Month
     birth_date_year: Year
     country: Country
+    currency: Currency
   placeholders:
     full_name: Full name
     email: Email address

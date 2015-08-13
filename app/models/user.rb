@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   belongs_to :country
+  belongs_to :currency
 
   validates :full_name, presence: true
 

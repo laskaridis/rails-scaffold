@@ -149,6 +149,7 @@ describe UsersController do
             full_name: 'New Name',
             gender: 'Male',
             country_id: create(:country).id,
+            currency_id: create(:eur).id,
             time_zone: 'Athens',
             receive_email_notifications: !@user.receive_email_notifications
           }
@@ -160,6 +161,7 @@ describe UsersController do
           expect(user.full_name).to eq @new_params[:full_name]
           expect(user.gender).to eq @new_params[:gender]
           expect(user.country).to eq Country.find(@new_params[:country_id])
+          expect(user.currency).to eq Currency.find(@new_params[:currency_id])
           expect(user.time_zone).to eq @new_params[:time_zone]
           expect(user.receive_email_notifications).to eq @new_params[:receive_email_notifications]
         end

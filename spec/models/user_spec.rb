@@ -17,6 +17,7 @@ describe User do
   it { is_expected.to validate_inclusion_of(:gender).in_array(%w(Male Female)).allow_blank }
 
   it { is_expected.to belong_to :country }
+  it { is_expected.to belong_to :currency }
 
   describe "#email" do
     it "stores email in down case and removes whitespace" do
