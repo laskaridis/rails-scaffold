@@ -4,14 +4,19 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  belongs_to :country
+
   validates :full_name, presence: true
+
   validates :gender,
     inclusion: { in: %w(Male Female) },
-    allow_nil: true
+    allow_blank: true
+
   validates :email,
     presence: true,
     email: { strict_mode: true },
     uniqueness: { case_sensitive: true }
+
   validates :password, presence: true, on: :create
 
   before_validation :normalize_email

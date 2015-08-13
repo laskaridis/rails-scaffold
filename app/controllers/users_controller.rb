@@ -30,10 +30,10 @@ class UsersController < ApplicationController
 
   # PUT /users
   def update
-    user = current_user
+    @user = current_user
 
-    user.update_attributes user_params_for_update
-    if user.save
+    @user.update_attributes user_params_for_update
+    if @user.save
       flash[:success] = I18n.t('successes.profile_updated')
       redirect_to storefront_path
     else
@@ -80,6 +80,7 @@ class UsersController < ApplicationController
     params.fetch(:user, {}).permit(
       :full_name,
       :gender,
+      :country_id,
       :time_zone,
       :birth_date,
       :receive_email_notifications
