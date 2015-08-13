@@ -16,6 +16,7 @@ en:
     newsletter: I want to receive notifications by email
     user-agreement: By clicking register, you confirm that you accept our
     and: and
+    time_zone: Time zone
   placeholders:
     full_name: Full name
     email: Email address
