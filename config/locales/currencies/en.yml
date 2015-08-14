@@ -1,0 +1,7 @@
+en:
+  currencies:
+    eur: "Euro"
+    usd: "US Dollar"
+    gbp: "British pound"
+    jpy: "Yen"
+    rub: "Ruble"
