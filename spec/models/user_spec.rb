@@ -18,6 +18,7 @@ describe User do
 
   it { is_expected.to belong_to :country }
   it { is_expected.to belong_to :currency }
+  it { is_expected.to belong_to :language }
 
   describe "#email" do
     it "stores email in down case and removes whitespace" do

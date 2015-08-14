@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   belongs_to :country
   belongs_to :currency
+  belongs_to :language
 
   validates :full_name, presence: true
 

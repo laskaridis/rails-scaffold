@@ -37,6 +37,7 @@ en:
     birth_date_year: Year
     country: Country
     currency: Currency
+    language: Language
   placeholders:
     full_name: Full name
     email: Email address
