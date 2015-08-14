@@ -168,7 +168,7 @@ describe UsersController do
           expect(user.receive_email_notifications).to eq @new_params[:receive_email_notifications]
         end
 
-        it { should redirect_to storefront_url }
+        it { should redirect_to edit_user_path }
         it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
       end
 

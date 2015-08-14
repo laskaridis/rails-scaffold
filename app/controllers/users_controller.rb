@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user.update_attributes user_params_for_update
     if @user.save
       flash[:success] = I18n.t('successes.profile_updated')
-      redirect_to storefront_path
+      redirect_to edit_user_path
     else
       render "edit"
     end
