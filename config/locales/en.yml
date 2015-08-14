@@ -22,7 +22,9 @@ en:
     register: Register
     login: Login
     remember-me: Stay signed in
-    edit_profile: Edit profile
+    edit_profile: Profile
+    edit_settings: Settings
+    edit_preferences: Preferences
   labels:
     full_name: Full name
     email: Email
