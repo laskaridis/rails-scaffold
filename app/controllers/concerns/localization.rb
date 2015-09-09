@@ -5,7 +5,9 @@ module Localization
     before_action :set_locale
     hide_action(
       :default_url_options,
-      :set_locale
+      :set_locale,
+      :locale_from_url_parameters,
+      :locale_from_client
     )
   end
 
@@ -14,6 +16,20 @@ module Localization
   end
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+
+    I18n.locale =
+      locale_from_url_parameters ||
+      locale_from_client ||
+      I18n.default_locale
+  end
+
+  def locale_from_url_parameters
+    params[:locale]
+  end
+
+  def locale_from_client
+    if request.env["HTTP_ACCEPT_LANGUAGE"]
+      request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
+    end
   end
 end
