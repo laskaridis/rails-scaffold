@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get '/verify/:token' => 'users#verify', as: 'verify_email'
     get '/users/edit' => 'users#edit', as: 'edit_user'
     put '/users' => 'users#update', as: 'update_user'
+    get '/account' => 'accounts#edit', as: 'edit_account'
+    put '/account/change_password' => 'accounts#change_password', as: 'change_password'
 
     resources :passwords, only: [:create, :new, :edit, :update]
 
