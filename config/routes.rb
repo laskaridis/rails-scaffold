@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en/ do
 
-    root 'storefront#index', as: 'storefront'
+    root 'storefront#index'
 
     resource :session, only: [:create]
     get '/login' => 'sessions#new', as: 'login'

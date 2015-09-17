@@ -28,7 +28,7 @@ module Authorization
     end
 
     if logged_in?
-      redirect_to storefront_url
+      redirect_to root_url
     else
       redirect_to login_url
     end

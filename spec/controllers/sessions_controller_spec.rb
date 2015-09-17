@@ -17,7 +17,7 @@ describe SessionsController do
         get :new
       end
 
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
       it { should_not set_flash }
     end
   end
@@ -58,7 +58,7 @@ describe SessionsController do
       end
 
       it 'redirects to storefront page' do
-        should redirect_to storefront_url
+        should redirect_to root_url
       end
     end
   end
@@ -69,7 +69,7 @@ describe SessionsController do
       delete :destroy
     end
 
-    it { should redirect_to storefront_url }
+    it { should redirect_to root_url }
     it { expect(controller).to_not be_logged_in }
     it { expect(controller).to be_logged_out }
     it { expect(controller.current_user).to be_nil }

@@ -10,7 +10,7 @@ class PasswordsController < ApplicationController
     if user = find_user_for_create
       user.forgot_password
       flash[:success] = pending_confirmation_message
-      redirect_to storefront_url
+      redirect_to root_url
     else
       flash[:email_not_found] = email_not_found_message
       render action: "new"
@@ -27,7 +27,7 @@ class PasswordsController < ApplicationController
         render action: "new"
       end
     else
-      redirect_to storefront_url
+      redirect_to root_url
     end
   end
 
@@ -39,12 +39,12 @@ class PasswordsController < ApplicationController
       if @user.change_password password_params[:password]
         login @user
         flash[:success] = password_changed_message
-        redirect_to storefront_url
+        redirect_to root_url
       else
         render template: "passwords/edit"
       end
     else
-      redirect_to storefront_url
+      redirect_to root_url
     end
   end
 

@@ -16,7 +16,7 @@ describe UsersController do
         get :new
       end
 
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
       it { should_not set_flash }
     end
   end
@@ -31,7 +31,7 @@ describe UsersController do
         end
 
         it 'redirects to storefront url' do
-          expect(response).to redirect_to storefront_url
+          expect(response).to redirect_to root_url
         end
 
         it 'logs user' do
@@ -66,7 +66,7 @@ describe UsersController do
         post :create, user: {}
       end
 
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
     end
   end
 
@@ -75,7 +75,7 @@ describe UsersController do
     context 'when no user cannot be found' do
       before { get :verify, token: 'invalid' }
 
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
     end
 
     context 'when email verification token has not expired' do
@@ -89,7 +89,7 @@ describe UsersController do
       it 'verifies user email' do
         expect(@user.reload).to be_email_confirmed
       end
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
       it { expect(flash[:success]).to eq I18n.t('successes.verify_email') }
     end
 
@@ -114,7 +114,7 @@ describe UsersController do
         expect(@old_token).to_not eq @user.reload.email_confirmation_token
       end
       it { expect(flash[:warning]).to eq I18n.t('errors.verify_email.expired') }
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
     end
   end
 

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login(@user)
-      redirect_to storefront_path
+      redirect_to root_url
     else
       render "new"
     end
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
       end
     end
 
-    redirect_to storefront_url
+    redirect_to root_url
   end
 
   private
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 
   def redirect_logged_in_users
     if logged_in?
-      redirect_to storefront_url
+      redirect_to root_url
     end
   end
 

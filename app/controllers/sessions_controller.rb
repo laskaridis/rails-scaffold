@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 
     if user.present?
       login(user)
-      redirect_back_or storefront_path
+      redirect_back_or root_url
     else
       flash.now[:credentials] = t('errors.login')
       render action: "new", status: :unauthorized
@@ -23,14 +23,14 @@ class SessionsController < ApplicationController
   # DELETE /session
   def destroy
     logout
-    redirect_to storefront_url
+    redirect_to root_url
   end
 
   private
 
   def redirect_logged_in_users
     if logged_in?
-      redirect_to storefront_url
+      redirect_to root_url
     end
   end
 

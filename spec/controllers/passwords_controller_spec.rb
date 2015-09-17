@@ -31,7 +31,7 @@ describe PasswordsController do
       end
 
       it { expect(flash[:success]).to include pending_confirmation_message }
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
 
       def pending_confirmation_message
         I18n.t("successes.reset_email").gsub(/:email/, @user.email)
@@ -78,7 +78,7 @@ describe PasswordsController do
         get :edit, id: user.id, token: 'invalid'
       end
 
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
       it { should_not set_flash }
     end
   end
@@ -103,7 +103,7 @@ describe PasswordsController do
       it "sets password_changed_at" do
         expect(@user.password_changed_at).to_not be_nil
       end
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
       it { should set_flash }
     end
 
@@ -115,7 +115,7 @@ describe PasswordsController do
           password: { password: 'newpassword' }
       end
 
-      it { should redirect_to storefront_url }
+      it { should redirect_to root_url }
       it { should_not set_flash }
     end
   end
