@@ -42,23 +42,49 @@ describe SessionsController do
       end
     end
 
-    context 'with valid credentials' do
+    context 'given a user pending verification' do
       before do
         @user = create(:user)
-        post :create, session: { email: @user.email, password: @user.password }
       end
 
-      it 'sets the user in session' do
-        expect(controller.current_user).to eq @user
+      context 'with valid credentials' do
+        before do
+          post :create, session: { email: @user.email, password: @user.password }
+        end
+
+        it 'should not set the user in session' do
+          expect(controller.current_user).to be_nil
+        end
+
+        it 'should not log user' do
+          expect(controller).to be_logged_out
+          expect(controller).to_not be_logged_in
+        end
+        
+        it { should redirect_to login_url }
+      end
+    end
+
+    context 'given a verified user' do
+      before do
+        @user = create(:user, :with_confirmed_email)
       end
 
-      it 'logs user' do
-        expect(controller).to be_logged_in
-        expect(controller).to_not be_logged_out
-      end
+      context 'with valid credentials' do
+        before do
+          post :create, session: { email: @user.email, password: @user.password }
+        end
 
-      it 'redirects to storefront page' do
-        should redirect_to root_url
+        it 'sets the user in session' do
+          expect(controller.current_user).to eq @user
+        end
+
+        it 'logs user' do
+          expect(controller).to be_logged_in
+          expect(controller).to_not be_logged_out
+        end
+        
+        it { should redirect_to root_url }
       end
     end
   end
