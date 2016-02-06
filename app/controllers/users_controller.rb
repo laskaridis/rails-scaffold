@@ -49,11 +49,13 @@ class UsersController < ApplicationController
   def verify
     user = find_user_by_email_confirmation_token
 
-    if user.confirm_email
-      flash[:success] = verify_email_success_message
-    else
-      user.reset_email_confirmation_token
-      flash[:warning] = verify_email_expired_message
+    if !user.email_confirmed?
+      if user.confirm_email
+        flash[:success] = verify_email_success_message
+      else
+        user.reset_email_confirmation_token
+        flash[:warning] = verify_email_expired_message
+      end
     end
 
     redirect_to login_url
