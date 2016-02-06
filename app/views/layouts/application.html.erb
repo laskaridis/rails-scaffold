@@ -8,13 +8,6 @@
 </head>
 <body>
   <div class="container flashes">
-    <% if logged_in? %>
-      <% unless current_user.email_confirmed? %>
-        <div id="email-confirmation-warning" class="alert alert-warning">
-          <p><%= t('warnings.email') %></p>
-        </div>
-      <% end %>
-    <% end %>
     <%= render partial: "/flashes" %>
   </div>
   <div class="container">
