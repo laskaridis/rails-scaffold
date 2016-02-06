@@ -48,19 +48,31 @@ class UsersController < ApplicationController
   # GET /verify/:token
   def verify
     user = find_user_by_email_confirmation_token
+
     if user.present?
       if user.confirm_email
-        flash[:success] = I18n.t('successes.verify_email')
+        flash[:success] = verify_email_success_message
       else
         user.reset_email_confirmation_token
-        flash[:warning] = I18n.t('errors.verify_email.expired')
+        flash[:warning] = verify_email_expired_message
       end
-    end
+      
+      redirect_to login_url
+    else
 
-    redirect_to root_url
+      redirect_to root_url
+    end
   end
 
   private
+
+  def verify_email_success_message
+    I18n.t('successes.verify_email')
+  end
+
+  def verify_email_expired_message
+    I18n.t('errors.verify_email.expired')
+  end
 
   def find_user_by_email_confirmation_token
     User.find_by_email_confirmation_token params[:token]

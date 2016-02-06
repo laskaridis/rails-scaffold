@@ -89,7 +89,7 @@ describe UsersController do
       it 'verifies user email' do
         expect(@user.reload).to be_email_confirmed
       end
-      it { should redirect_to root_url }
+      it { should redirect_to login_url }
       it { expect(flash[:success]).to eq I18n.t('successes.verify_email') }
     end
 
@@ -114,7 +114,7 @@ describe UsersController do
         expect(@old_token).to_not eq @user.reload.email_confirmation_token
       end
       it { expect(flash[:warning]).to eq I18n.t('errors.verify_email.expired') }
-      it { should redirect_to root_url }
+      it { should redirect_to login_url }
     end
   end
 
