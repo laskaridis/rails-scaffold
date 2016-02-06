@@ -57,7 +57,7 @@ describe UserMailer do
     end
 
     it "contains a link to confirm email" do
-      link = verify_email_url(token: @user.email_confirmation_token)
+      link = verify_user_url(token: @user.email_confirmation_token)
       expect(@email.text_part.body).to include(link)
       expect(@email.html_part.body).to include(link)
     end

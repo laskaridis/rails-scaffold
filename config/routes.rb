@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create, :destroy]
     get '/register' => 'users#new', as: 'register'
-    get '/verify/:token' => 'users#verify', as: 'verify_email'
+    get '/users/verify' => 'users#verify', as: 'verify_user'
     get '/users/edit' => 'users#edit', as: 'edit_user'
     put '/users' => 'users#update', as: 'update_user'
     get '/account' => 'accounts#edit', as: 'edit_account'
