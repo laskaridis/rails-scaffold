@@ -12,8 +12,8 @@ class UsersController < ApplicationController
     @user = user_from_params_for_create
 
     if @user.save
-      login @user
-      redirect_to root_url
+      flash[:success] = user_registered_message
+      redirect_to login_url
     else
       render "new"
     end
@@ -60,6 +60,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_registered_message
+    I18n.t('successes.user_registered')
+  end
 
   def verify_email_success_message
     I18n.t('successes.verify_email')

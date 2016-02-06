@@ -64,6 +64,9 @@ en:
       cookies: Cookies
       privacy: Privacy Policy
   successes:
+    user_registered: "You have been registered successfully. Please
+      confirm your registration by clicking on the link that we have
+      just sent you in your email"
     verify_email: "Your email address is now verified."
     reset_email: "We just sent you an email to :email with
       a link to reset your password."

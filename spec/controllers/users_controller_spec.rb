@@ -31,15 +31,15 @@ describe UsersController do
         end
 
         it 'redirects to storefront url' do
-          expect(response).to redirect_to root_url
+          expect(response).to redirect_to login_url
         end
 
-        it 'logs user' do
-          expect(controller).to be_logged_in
+        it 'should not log user' do
+          expect(controller).to be_logged_out
         end
 
-        it 'sets current user' do
-          expect(controller.current_user).to be_present
+        it 'should not set the current user' do
+          expect(controller.current_user).to be_nil
         end
       end
 
