@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = user_from_params_for_create
 
     if @user.save
-      login(@user)
+      login @user
       redirect_to root_url
     else
       render "new"
@@ -49,19 +49,14 @@ class UsersController < ApplicationController
   def verify
     user = find_user_by_email_confirmation_token
 
-    if user.present?
-      if user.confirm_email
-        flash[:success] = verify_email_success_message
-      else
-        user.reset_email_confirmation_token
-        flash[:warning] = verify_email_expired_message
-      end
-      
-      redirect_to login_url
+    if user.confirm_email
+      flash[:success] = verify_email_success_message
     else
-
-      redirect_to root_url
+      user.reset_email_confirmation_token
+      flash[:warning] = verify_email_expired_message
     end
+
+    redirect_to login_url
   end
 
   private
@@ -75,7 +70,7 @@ class UsersController < ApplicationController
   end
 
   def find_user_by_email_confirmation_token
-    User.find_by_email_confirmation_token params[:token]
+    User.find_by_email_confirmation_token! params[:token]
   end
 
   def redirect_logged_in_users

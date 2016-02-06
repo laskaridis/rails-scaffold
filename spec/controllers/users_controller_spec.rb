@@ -73,9 +73,10 @@ describe UsersController do
   describe 'GET #verify' do
 
     context 'when no user cannot be found' do
-      before { get :verify, token: 'invalid' }
 
-      it { should redirect_to root_url }
+      it 'raises an error' do
+        expect { get :verify, token: 'invalid' }.to raise_error ActiveRecord::RecordNotFound
+      end
     end
 
     context 'when email verification token has not expired' do
