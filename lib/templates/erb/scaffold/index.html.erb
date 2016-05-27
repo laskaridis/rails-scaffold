@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <h4>Listing <%= plural_table_name.titleize %></h4>
+
+    <%%= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, class: "btn btn-primary" %>
+
+    <table class="table">
+      <thead>
+        <tr>
+    <% attributes.reject(&:password_digest?).each do |attribute| -%>
+          <th><%= attribute.human_name %></th>
+    <% end -%>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+          <tr>
+    <% attributes.reject(&:password_digest?).each do |attribute| -%>
+            <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+    <% end -%>
+    <td>
+      <%%= link_to <%= singular_table_name %> do %>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      <%% end %>
+    </td>
+    <td>
+      <%%= link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>) do %>
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      <%% end %>
+    </td>
+    <td>
+      <%%= link_to <%= singular_table_name %>, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      <%% end %>
+    </td>
+          </tr>
+        <%% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
