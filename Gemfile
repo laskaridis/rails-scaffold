@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'delayed_job_active_record'
 gem 'email_validator'
+gem 'kaminari'
 gem 'unicorn'
 gem 'daemons'
 
