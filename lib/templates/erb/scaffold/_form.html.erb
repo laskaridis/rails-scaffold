@@ -7,9 +7,22 @@
 
 <% attributes.each do |attribute| -%>
   <div class="form-group <%%= 'has-error' if @<%= singular_table_name %>.errors[:<%= attribute.column_name %>].any? %>">
-    <%%= f.label :<%= attribute.column_name %>, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-10">
+<% unless attribute.field_type == :check_box -%>
+    <%%= f.label :<%= attribute.column_name %>, class: 'col-sm-2 control-label' -%>
+<% end -%>
+    <div class="<%= 'col-sm-offset-2' if attribute.field_type == :check_box %> col-sm-10 col-md-6">
+<% if attribute.field_type == :datetime_select || attribute.field_type == :date_select %>
+      <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, {}, { class: 'form-control date-control' } -%>
+<% elsif attribute.field_type == :check_box %>
+      <div class="checkbox">
+        <label>
+          <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+          <%= attribute.name.titleize %>
+        </label>
+      </div>
+<% else -%>
       <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, class: 'form-control' %>
+<% end -%>
       <%% if @<%= singular_table_name %>.errors[:<%= attribute.column_name %>].any? %>
         <span class="help-block">
           <%%= @<%= singular_table_name %>.errors.full_messages_for(:<%= attribute.column_name %>).last %>
