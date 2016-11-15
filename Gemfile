@@ -20,9 +20,10 @@ gem 'daemons'
 
 # gem 'capistrano-rails', group: :development
 
+gem 'web-console', '~> 2.0', group: :development
+
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails', '~> 4.2'

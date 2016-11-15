@@ -2,7 +2,12 @@
 describe Language do
   
   it { is_expected.to validate_presence_of :code }
-  it { is_expected.to validate_uniqueness_of :code }
+
+  context "given an existing instance" do
+    before { create(:language) }
+
+    it { is_expected.to validate_uniqueness_of(:code).case_insensitive }
+  end
 
   describe '#name' do
     subject { build :english }

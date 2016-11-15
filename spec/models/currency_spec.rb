@@ -3,7 +3,7 @@ describe Currency do
   subject { create :eur }
 
   it { is_expected.to validate_presence_of :code }
-  it { is_expected.to validate_uniqueness_of :code }
+  it { is_expected.to validate_uniqueness_of(:code).case_insensitive }
   it { is_expected.to validate_presence_of :symbol }
 
   describe '#name' do
