@@ -13,16 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20150814085842) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "countries", force: :cascade do |t|
     t.string   "code",       limit: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "countries", ["code"], name: "index_countries_on_code", unique: true, using: :btree
+  add_index "countries", ["code"], name: "index_countries_on_code", unique: true
 
   create_table "currencies", force: :cascade do |t|
     t.string   "code",       limit: 3, null: false
@@ -31,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150814085842) do
     t.datetime "updated_at"
   end
 
-  add_index "currencies", ["code"], name: "index_currencies_on_code", unique: true, using: :btree
+  add_index "currencies", ["code"], name: "index_currencies_on_code", unique: true
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -47,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150814085842) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "languages", force: :cascade do |t|
     t.string   "code",       limit: 2, null: false
@@ -55,29 +52,29 @@ ActiveRecord::Schema.define(version: 20150814085842) do
     t.datetime "updated_at"
   end
 
-  add_index "languages", ["code"], name: "index_languages_on_code", unique: true, using: :btree
+  add_index "languages", ["code"], name: "index_languages_on_code", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                                       null: false
     t.string   "encrypted_password",              limit: 128,                 null: false
+    t.string   "full_name",                                                   null: false
     t.string   "email_confirmation_token",        limit: 128
     t.datetime "email_confirmation_requested_at"
     t.datetime "email_confirmed_at"
     t.string   "password_change_token",           limit: 128
     t.datetime "password_change_requested_at"
     t.datetime "password_changed_at"
+    t.string   "gender"
+    t.datetime "birth_date"
+    t.string   "time_zone",                                   default: "UTC", null: false
+    t.boolean  "receive_email_notifications",                 default: false
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
-    t.string   "full_name"
-    t.boolean  "receive_email_notifications",                 default: false
-    t.string   "time_zone",                                   default: "UTC"
-    t.datetime "birth_date"
-    t.string   "gender"
     t.integer  "country_id"
     t.integer  "currency_id"
     t.integer  "language_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email"
 
 end
