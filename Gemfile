@@ -20,17 +20,16 @@ gem 'daemons'
 
 # gem 'capistrano-rails', group: :development
 
-gem 'web-console', '~> 2.0', group: :development
-
-group :development, :test do
+group :development do
+  gem 'web-console', '~> 2.0'
   gem 'byebug'
   gem 'spring'
-  gem 'rspec-rails', '~> 3.1'
-  gem 'factory_girl_rails', '~> 4.2'
   gem 'delayed_job_web'
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.1'
+  gem 'factory_girl_rails', '~> 4.2'
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
 end
