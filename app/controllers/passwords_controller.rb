@@ -12,7 +12,7 @@ class PasswordsController < ApplicationController
       flash[:success] = pending_confirmation_message
       redirect_to root_url
     else
-      flash[:email_not_found] = email_not_found_message
+      flash[:error] = email_not_found_message
       render action: "new"
     end
   end

@@ -1,0 +1,43 @@
+div#login {
+  padding-top: 60px;
+
+  form {
+    margin: 0 auto;
+    padding: 40px;
+    width: 400px;
+
+    @include respond-to(smartphones) {
+      width: 100% !important;
+      padding: 40px 20px !important;
+    }
+
+    legend {
+      text-align: center;
+      font-size: 35px;
+      margin: 0 auto 45px;
+      text-transform: none;
+      border: 0;
+    }
+
+    input {
+      width: 100%;
+      margin: 20px auto;
+      padding: 15px;
+      border: 2px solid #e7e7e7;
+      background: #fcfcfc;
+      height: auto;
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      font-size: 22px;
+    }
+
+    p {
+      margin-top: 10px;
+    }
+  }
+}

@@ -41,7 +41,7 @@ describe PasswordsController do
     context "given and email that does not correspond to a registered user" do
       before { post :create, password: {email: "invalid@domain.com"} }
 
-      it { expect(flash[:email_not_found]).to include email_not_found_message }
+      it { expect(flash[:error]).to include email_not_found_message }
       it { expect(response).to render_template(:new) }
 
       def email_not_found_message

@@ -29,7 +29,7 @@ describe SessionsController do
 
       it 'renders login page with error' do
         expect(response).to render_template(:new)
-        expect(flash[:credentials]).to eq I18n.t('errors.login')
+        expect(flash[:error]).to eq I18n.t('errors.login')
       end
 
       it 'should not set the user in session' do

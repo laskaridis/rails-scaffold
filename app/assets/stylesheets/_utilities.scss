@@ -1,0 +1,15 @@
+@mixin respond-to($media) {
+  @if $media == smartphones {
+    @media only screen and (max-width: $screen-xs-max) { @content; }
+  }
+  @if $media == tablets {
+    @media only screen and (min-width: $screen-sm-min) { @content; }
+  }
+  @if $media == desktops {
+    @media only screen and (min-width: $screen-md-min) { @content; }
+  }
+  @if $media == wide-screens {
+    @media only screen and (min-width: $screen-lg-min) { @content; }
+  }
+}
+

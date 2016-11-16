@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
         redirect_to login_url
       end
     else
-      flash.now[:credentials] = t('errors.login')
+      flash.now[:error] = t('errors.login')
       render action: "new", status: :unauthorized
     end
   end
