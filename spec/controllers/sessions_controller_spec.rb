@@ -45,23 +45,16 @@ describe SessionsController do
     context 'given a user pending verification' do
       before do
         @user = create(:user)
+        post :create, session: { email: @user.email, password: @user.password }
       end
 
-      context 'with valid credentials' do
-        before do
-          post :create, session: { email: @user.email, password: @user.password }
-        end
+      it 'should log user' do
+        expect(controller.current_user).to eq @user
+        expect(controller).to be_logged_in
+      end
 
-        it 'should not set the user in session' do
-          expect(controller.current_user).to be_nil
-        end
-
-        it 'should not log user' do
-          expect(controller).to be_logged_out
-          expect(controller).to_not be_logged_in
-        end
-        
-        it { should redirect_to login_url }
+      it "should warn user" do
+        expect(flash[:warning]).to eq I18n.t('errors.verify_email.pending')
       end
     end
 
