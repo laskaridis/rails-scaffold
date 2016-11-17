@@ -1,22 +1,53 @@
 <div id="login" class="container">
-<%= render partial: "/errors", locals: {model: @user} %>
-<%= form_for @user, html: {class: 'form-horizontal'}  do |form| %>
+<%= form_for @user, html: { class: "form-horizontal" } do |form| %>
+
   <legend><%= t 'headings.register' %></legend>
-  <%= form.text_field :full_name,
-    class: 'form-control',
-    placeholder: t('placeholders.full_name'),
-    autofocus: true %>
-  <%= form.email_field :email,
-    class: 'form-control',
-    placeholder: t('placeholders.email'),
-    autofocus: true %>
-  <%= form.password_field :password,
-    class: "form-control",
-    placeholder: t("placeholders.password") %>
-  <button class="btn btn-default btn-primary" type="submit">
-    <%= t 'buttons.register' %>
-  </button>
-  <p class="text-center">
+
+  <div class="form-group <%= 'has-error' if @user.errors.include?(:full_name) %>">
+    <% if @user.errors.include?(:full_name) %>
+      <p class="error-text text-center text-danger">
+        <%= @user.errors.full_messages_for(:full_name).first %></p>
+    <% end %>
+
+    <%= form.text_field :full_name,
+      class: 'form-control',
+      placeholder: t('placeholders.full_name'),
+      required: "required",
+      autofocus: true %>
+  </div>
+
+  <div class="form-group <%= 'has-error' if @user.errors.include?(:email) %>">
+    <% if @user.errors.include?(:email) %>
+      <p class="error-text text-center text-danger">
+        <%= @user.errors.full_messages_for(:email).first %></p>
+    <% end %>
+
+    <%= form.email_field :email,
+      class: 'form-control',
+      placeholder: t('placeholders.email'),
+      required: "required",
+      autofocus: true %>
+  </div>
+
+  <div class="form-group <%= 'has-error' if @user.errors.include?(:password) %>">
+    <% if @user.errors.include?(:password) %>
+      <p class="error-text text-center text-danger">
+        <%= @user.errors.full_messages_for(:password).first %></p>
+    <% end %>
+
+    <%= form.password_field :password,
+      class: "form-control",
+      required: "required",
+      placeholder: t("placeholders.password") %>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-default btn-primary" type="submit">
+      <%= t 'buttons.register' %>
+    </button>
+  </div>
+  
+  <p class="sub-text text-center">
     <%= t 'labels.user-agreement' %>
     <a href="#"><%= t 'links.policies.terms' %></a>,
     <a href="#"><%= t 'links.policies.cookies' %></a>

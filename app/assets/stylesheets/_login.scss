@@ -21,12 +21,12 @@ div#login {
 
     input {
       width: 100%;
-      margin: 20px auto;
       padding: 15px;
       border: 2px solid #e7e7e7;
       background: #fcfcfc;
       height: auto;
       font-size: 18px;
+      transition: opacity 0.4s;
     }
 
     button {
@@ -36,8 +36,21 @@ div#login {
       font-size: 22px;
     }
 
+    .field_with_errors {
+      input {
+        border: 2px solid $state-danger-border !important; 
+        background: $state-danger-bg;
+      }
+    }
+
     p {
-      margin-top: 10px;
+      &.error-text {
+        margin: 0;
+      }
+
+      &.sub-text {
+        margin-top: 10px;
+      }
     }
   }
 }
