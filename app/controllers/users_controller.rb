@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/edit
+  # GET /user/edit
   def edit
     @user = current_user
   end
@@ -28,11 +28,37 @@ class UsersController < ApplicationController
 
   end
 
-  # PUT /users
-  def update
+  # PUT /user/profile
+  def update_profile
     @user = current_user
 
-    @user.update_attributes user_params_for_update
+    @user.update_attributes(user_profile_params)
+    if @user.save
+      flash[:success] = I18n.t('successes.profile_updated')
+      redirect_to edit_user_path
+    else
+      render "edit"
+    end
+  end
+
+  # PUT /user/settings
+  def update_settings
+    @user = current_user
+
+    @user.update_attributes(user_settings_params)
+    if @user.save
+      flash[:success] = I18n.t('successes.profile_updated')
+      redirect_to edit_user_path
+    else
+      render "edit"
+    end
+  end
+
+  # PUT /user/preferences
+  def update_preferences
+    @user = current_user
+
+    @user.update_attributes(user_preferences_params)
     if @user.save
       flash[:success] = I18n.t('successes.profile_updated')
       redirect_to edit_user_path
@@ -63,6 +89,27 @@ class UsersController < ApplicationController
 
   private
 
+  def user_profile_params
+    params.fetch(:user, {}).permit(
+      :full_name,
+      :gender,
+      :birth_date
+    )
+  end
+
+  def user_settings_params
+    params.fetch(:user, {}).permit(
+      :country_id,
+      :currency_id,
+      :language_id,
+      :time_zone
+    )
+  end
+
+  def user_preferences_params
+    params.fetch(:user, {}).permit(:receive_email_notifications)
+  end
+
   def user_registered_message
     I18n.t('successes.user_registered')
   end
@@ -87,19 +134,6 @@ class UsersController < ApplicationController
 
   def user_from_params_for_create
     User.new(user_params_for_create)
-  end
-
-  def user_params_for_update
-    params.fetch(:user, {}).permit(
-      :full_name,
-      :gender,
-      :country_id,
-      :currency_id,
-      :language_id,
-      :time_zone,
-      :birth_date,
-      :receive_email_notifications
-    )
   end
 
   def user_params_for_create

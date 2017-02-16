@@ -1,13 +1,13 @@
 <div class="container">
 <div class="row">
-  <%= render partial: "/errors", locals: {model: @user} %>
-  <%= form_for @user, method: :put, url: update_user_path, html: {class: 'form-horizontal'}  do |form| %>
+  <%= form_for @user, method: :put, url: update_user_profile_path, html: {class: 'form-horizontal'}  do |form| %>
     <div class="panel">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4><%= t 'edit_profile' %></h4>
         </div>
         <div class="panel-body">
+          <%= render partial: "/errors", locals: {model: @user} %>
           <div class="form-group <%= 'has-error' unless @user.errors[:full_name].empty? %>">
             <%= form.label :full_name, t('labels.full_name'), class: 'col-sm-2 control-label' %>
             <div class="col-sm-7">
@@ -65,6 +65,8 @@
         </div>
       </div>
     </div>
+  <% end %>
+  <%= form_for @user, method: :put, url: update_user_settings_path, html: {class: 'form-horizontal'}  do |form| %>
     <div class="panel">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -117,6 +119,8 @@
         </div>
       </div>
     </div>
+  <% end %>
+  <%= form_for @user, method: :put, url: update_user_preferences_path, html: {class: 'form-horizontal'}  do |form| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4><%= t 'edit_preferences' %></h4>

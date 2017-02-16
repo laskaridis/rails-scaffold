@@ -139,62 +139,126 @@ describe UsersController do
     end
   end
 
-  describe 'PUT #update' do
+  describe "PUT #update_profile" do
+    before { @user = login }
 
-    context 'when logged in' do
-      before { @user = login }
-
-      context 'when parameters are valid' do
-        before do
-          @new_params = {
-            full_name: 'New Name',
-            gender: 'Male',
-            country_id: create(:country).id,
-            currency_id: create(:eur).id,
-            language_id: create(:english).id,
-            time_zone: 'Athens',
-            receive_email_notifications: !@user.receive_email_notifications
-          }
-          put :update, id: @user.id, user: @new_params
-        end
-
-        it 'updates user' do
-          user = User.find(@user.id)
-          expect(user.full_name).to eq @new_params[:full_name]
-          expect(user.gender).to eq @new_params[:gender]
-          expect(user.country).to eq Country.find(@new_params[:country_id])
-          expect(user.currency).to eq Currency.find(@new_params[:currency_id])
-          expect(user.language).to eq Language.find(@new_params[:language_id])
-          expect(user.time_zone).to eq @new_params[:time_zone]
-          expect(user.receive_email_notifications).to eq @new_params[:receive_email_notifications]
-        end
-
-        it { should redirect_to edit_user_path }
-        it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
+    context "when parameters are valid" do
+      before do
+        @new_params = {
+          full_name: 'New Name',
+          gender: 'Male'
+        }
+        put :update_profile, user: @new_params
       end
 
-      context 'when parameters are invalid' do
-        before do
-          @new_params = { full_name: nil }
-          put :update, id: @user.id, user: @new_params
-        end
-
-        it 'should not update user' do
-          user = User.find(@user.id)
-          expect(user.full_name).to eq @user.full_name
-        end
-
-        it { should render_template "edit" }
+      it 'updates user' do
+        user = User.find(@user.id)
+        expect(user.full_name).to eq @new_params[:full_name]
+        expect(user.gender).to eq @new_params[:gender]
+        expect(user.country).to eq @user.country
+        expect(user.currency).to eq @user.currency
+        expect(user.language).to eq @user.language
+        expect(user.time_zone).to eq @user.time_zone
+        expect(user.receive_email_notifications).to eq @user.receive_email_notifications
       end
+
+      it { should redirect_to edit_user_path }
+      it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
+
     end
 
-    context 'when not logged in' do
+    context 'when parameters are invalid' do
       before do
-        user = create :user
-        put :update, id: user.id
+        put :update_profile, user: { }
       end
 
-      it { should redirect_to login_url }
+      it 'should not update user' do
+        user = User.find(@user.id)
+        expect(user.full_name).to eq @user.full_name
+        expect(user.gender).to eq @user.gender
+      end
+    end
+  end
+
+  describe "PUT #update_settings" do
+    before { @user = login }
+
+    context "when parameters are valid" do
+      before do
+        @new_params = {
+          country_id: create(:country).id,
+          currency_id: create(:eur).id,
+          language_id: create(:english).id,
+          time_zone: 'Athens',
+        }
+        put :update_settings, user: @new_params
+      end
+
+      it 'updates user' do
+        user = User.find(@user.id)
+        expect(user.full_name).to eq @user.full_name
+        expect(user.gender).to eq @user.gender
+        expect(user.country.id).to eq @new_params[:country_id]
+        expect(user.currency.id).to eq @new_params[:currency_id]
+        expect(user.language.id).to eq @new_params[:language_id]
+        expect(user.time_zone).to eq @new_params[:time_zone]
+        expect(user.receive_email_notifications).to eq @user.receive_email_notifications
+      end
+
+      it { should redirect_to edit_user_path }
+      it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
+    end
+
+    context 'when parameters are invalid' do
+      before do
+        put :update_settings, user: { }
+      end
+
+      it 'should not update user' do
+        user = User.find(@user.id)
+        expect(user.country).to eq @user.country
+        expect(user.currency).to eq @user.currency
+        expect(user.language).to eq @user.language
+        expect(user.time_zone).to eq @user.time_zone
+      end
+    end
+  end
+
+  describe "PUT #update_preferences" do
+    before { @user = login }
+
+    context "when parameters are valid" do
+      before do
+        @new_params = {
+          receive_email_notifications: !@user.receive_email_notifications
+        }
+        put :update_preferences, user: @new_params
+      end
+
+      it 'updates user' do
+        user = User.find(@user.id)
+        expect(user.full_name).to eq @user.full_name
+        expect(user.gender).to eq @user.gender
+        expect(user.country).to eq @user.country
+        expect(user.currency).to eq @user.currency
+        expect(user.language).to eq @user.language
+        expect(user.time_zone).to eq @user.time_zone
+        expect(user.receive_email_notifications).to eq @new_params[:receive_email_notifications]
+      end
+
+      it { should redirect_to edit_user_path }
+      it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
+    end
+
+    context 'when parameters are invalid' do
+      before do
+        put :update_preferences, user: { }
+      end
+
+      it 'should not update user' do
+        user = User.find(@user.id)
+        expect(user.receive_email_notifications).to eq @user.receive_email_notifications
+      end
     end
   end
 end
