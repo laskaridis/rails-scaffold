@@ -10,13 +10,16 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create, :destroy]
     get '/register' => 'users#new', as: 'register'
-    get '/user/verify' => 'users#verify', as: 'verify_user'
-    get '/user/edit' => 'users#edit', as: 'edit_user'
-    put '/user/profile' => 'users#update_profile', as: 'update_user_profile'
-    put '/user/settings' => 'users#update_settings', as: 'update_user_settings'
-    put '/user/preferences' => 'users#update_preferences', as: 'update_user_preferences'
-    get '/account' => 'accounts#edit', as: 'edit_account'
-    put '/account/change_password' => 'accounts#change_password', as: 'change_password'
+
+    scope '/user' do
+      get '/verify' => 'users#verify', as: 'verify_user'
+      get '/edit' => 'users#edit', as: 'edit_user'
+      put '/profile' => 'users#update_profile', as: 'update_user_profile'
+      put '/settings' => 'users#update_settings', as: 'update_user_settings'
+      put '/preferences' => 'users#update_preferences', as: 'update_user_preferences'
+      get '/account' => 'accounts#edit', as: 'edit_account'
+      put '/account/change_password' => 'accounts#change_password', as: 'change_password'
+    end
 
     resources :passwords, only: [:create, :new, :edit, :update]
 
