@@ -1,0 +1,25 @@
+<div class="container">
+<div class="row">
+</div>
+  <div class="col-sm-3">
+    <%= render partial: "menu" %>
+  </div>
+  <div class="col-sm-9">
+    <table class="table">
+      <theader>
+        <th>Recipient</th>
+        <th>Subject</th>
+        <th>Sent</th>
+      </theader>
+      <tbody id="messages">
+        <% @messages.each do |message| %>
+          <tr>
+            <td><%= message.recipient.full_name %></td>
+            <td><%= message.subject %></td>
+            <td><%= l message.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

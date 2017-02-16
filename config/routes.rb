@@ -21,6 +21,11 @@ Rails.application.routes.draw do
       put '/preferences' => 'users#update_preferences', as: 'update_user_preferences'
       get '/account' => 'accounts#edit', as: 'user_account'
       put '/account/change_password' => 'accounts#change_password', as: 'change_password'
+
+      get '/messages' => 'messages#index', as: 'messages'
+      post '/messages' => 'messages#create'
+      get '/messages/:id' => 'messages#show', as: 'message'
+      delete '/messages/:id' => 'messages#destroy'
     end
 
     resources :passwords, only: [:create, :new, :edit, :update]

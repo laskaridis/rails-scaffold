@@ -19,6 +19,8 @@ describe User do
   it { is_expected.to belong_to :country }
   it { is_expected.to belong_to :currency }
   it { is_expected.to belong_to :language }
+  it { should have_many(:sent_messages).class_name("Message") }
+  it { should have_many(:received_messages).class_name("Message") }
 
   describe "#email" do
     it "stores email in down case and removes whitespace" do

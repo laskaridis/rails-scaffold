@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814085842) do
+ActiveRecord::Schema.define(version: 20170216124227) do
 
   create_table "countries", force: :cascade do |t|
     t.string   "code",       limit: 2, null: false
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 20150814085842) do
   end
 
   add_index "languages", ["code"], name: "index_languages_on_code", unique: true
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "sender_id",                    null: false
+    t.integer  "recipient_id",                 null: false
+    t.string   "subject",                      null: false
+    t.string   "message",                      null: false
+    t.boolean  "read",         default: false, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                                       null: false
