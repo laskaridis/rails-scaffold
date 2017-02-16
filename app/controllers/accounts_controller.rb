@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
     @account = ChangePasswordForm.new current_user
     if @account.perform change_password_params
       flash[:success] = I18n.t("successes.password_changed")
-      redirect_to edit_account_path
+      redirect_to user_account_path
     else
       render :edit
     end

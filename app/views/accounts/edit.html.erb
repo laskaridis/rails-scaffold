@@ -1,47 +1,65 @@
 <div class="container">
 <div class="row">
-  <%= form_for @account, method: :put, url: change_password_path do |form| %>
-    <legend><%= t 'change_password' %></legend>
-    <div class="col-sm-7">
-      <div class="form-group <%= 'has-error' unless @account.errors[:old_password].empty? %>">
-        <%= form.label :old_password, t('labels.old_password'), class: 'control-label' %>
-        <%= form.password_field :old_password, class: 'form-control', autofocus: true %>
-        <% if @account.errors[:old_password].any? %>
-          <span class="help-block">
-            <%= @account.errors.full_messages_for(:old_password).first %>
-          </span>
-        <% end %>
+  <div class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation">
+        <%= link_to "Profile", user_profile_path %>
+      </li>
+      <li role="presentation">
+        <%= link_to "Settings", user_settings_path %>
+      </li>
+      <li role="presentation">
+        <%= link_to "Preferences", user_preferences_path %>
+      </li>
+      <li role="presentation" class="active">
+        <%= link_to "Account", user_account_path %>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-9">
+    <%= form_for @account, method: :put, url: change_password_path do |form| %>
+      <legend><%= t 'change_password' %></legend>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @account.errors[:old_password].empty? %>">
+          <%= form.label :old_password, t('labels.old_password'), class: 'control-label' %>
+          <%= form.password_field :old_password, class: 'form-control', autofocus: true %>
+          <% if @account.errors[:old_password].any? %>
+            <span class="help-block">
+              <%= @account.errors.full_messages_for(:old_password).first %>
+            </span>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-7">
-      <div class="form-group <%= 'has-error' unless @account.errors[:password].empty? %>">
-        <%= form.label :password, t('labels.new_password'), class: 'control-label' %>
-        <%= form.password_field :password, class: 'form-control', autofocus: true %>
-        <% if @account.errors[:password].any? %>
-          <span class="help-block">
-            <%= @account.errors.full_messages_for(:password).first %>
-          </span>
-        <% end %>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @account.errors[:password].empty? %>">
+          <%= form.label :password, t('labels.new_password'), class: 'control-label' %>
+          <%= form.password_field :password, class: 'form-control', autofocus: true %>
+          <% if @account.errors[:password].any? %>
+            <span class="help-block">
+              <%= @account.errors.full_messages_for(:password).first %>
+            </span>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-7">
-      <div class="form-group <%= 'has-error' unless @account.errors[:password_confirmation].empty? %>">
-        <%= form.label :password_confirmation, t('labels.new_password_confirm'), class: 'control-label' %>
-        <%= form.password_field :password_confirmation, class: 'form-control', autofocus: true %>
-        <% if @account.errors[:password_confirmation].any? %>
-          <span class="help-block">
-            <%= @account.errors.full_messages_for(:password_confirmation).first %>
-          </span>
-        <% end %>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @account.errors[:password_confirmation].empty? %>">
+          <%= form.label :password_confirmation, t('labels.new_password_confirm'), class: 'control-label' %>
+          <%= form.password_field :password_confirmation, class: 'form-control', autofocus: true %>
+          <% if @account.errors[:password_confirmation].any? %>
+            <span class="help-block">
+              <%= @account.errors.full_messages_for(:password_confirmation).first %>
+            </span>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-7">
-      <div class="form-group">
-        <button class="btn btn-default btn-primary" type="submit">
-          <%= t "change_password" %>
-        </button>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <button class="btn btn-default btn-primary" type="submit">
+            <%= t "change_password" %>
+          </button>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 </div>

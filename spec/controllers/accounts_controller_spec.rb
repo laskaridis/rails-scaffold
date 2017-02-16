@@ -42,7 +42,7 @@ describe AccountsController do
           put :change_password, attributes
         end
 
-        it { should redirect_to edit_account_path }
+        it { should redirect_to user_account_path }
         it { expect(flash[:success]).to eq I18n.t("successes.password_changed") }
 
         it "should change password of logged user" do
