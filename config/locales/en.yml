@@ -57,6 +57,9 @@ en:
     update: Update
     profile: Profile
     account: Account
+    update_profile: Update profile
+    update_settings: Update settings
+    update_preferences: Update preferences
   links:
     forgot-password: Forgot your password?
     policies:
@@ -88,4 +91,4 @@ en:
         confirm your registration by clicking on the link that we have
         sent you in your email"
     reset_email_not_found: "Could not find the email that you specified."
-    old_password_incorrect: "Your old password is incorrect. Please try again."
+    old_password_incorrect: "Your preferences password is incorrect. Please try again."

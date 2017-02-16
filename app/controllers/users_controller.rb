@@ -19,13 +19,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /user/edit
-  def edit
+  # GET /user/profile
+  def profile
     @user = current_user
-  end
-
-  def show
-
   end
 
   # PUT /user/profile
@@ -35,10 +31,15 @@ class UsersController < ApplicationController
     @user.update_attributes(user_profile_params)
     if @user.save
       flash[:success] = I18n.t('successes.profile_updated')
-      redirect_to edit_user_path
+      redirect_to user_profile_path
     else
-      render "edit"
+      render :profile
     end
+  end
+
+  # GET /user/settings
+  def settings
+    @user = current_user
   end
 
   # PUT /user/settings
@@ -48,10 +49,15 @@ class UsersController < ApplicationController
     @user.update_attributes(user_settings_params)
     if @user.save
       flash[:success] = I18n.t('successes.profile_updated')
-      redirect_to edit_user_path
+      redirect_to user_settings_path
     else
-      render "edit"
+      render :settings
     end
+  end
+
+  # GET /user/preferences
+  def preferences
+    @user = current_user
   end
 
   # PUT /user/preferences
@@ -61,9 +67,9 @@ class UsersController < ApplicationController
     @user.update_attributes(user_preferences_params)
     if @user.save
       flash[:success] = I18n.t('successes.profile_updated')
-      redirect_to edit_user_path
+      redirect_to user_preferences_path
     else
-      render "edit"
+      render :preferences
     end
   end
 

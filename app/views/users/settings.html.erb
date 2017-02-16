@@ -1,0 +1,55 @@
+<div class="container">
+<div class="row">
+  <div class="col-sm-3">
+    <%= render "menu", selected: "settings" %>
+  </div>
+  <div class="col-sm-9">
+    <%= form_for @user, method: :put, url: update_user_settings_path do |form| %>
+      <legend><%= t 'edit_settings' %></legend>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @user.errors[:country_id].empty? %>">
+          <%= form.label :country, t('labels.country'), class: 'control-label' %>
+          <%= form.select :country_id,
+            options_from_collection_for_select(Country.all.sort, :id, :name, @user.country_id),
+            { include_blank: true },
+            { class: 'form-control' } %>
+      </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @user.errors[:currency_id].empty? %>">
+          <%= form.label :currency, t('labels.currency'), class: 'control-label' %>
+          <%= form.select :currency_id,
+            options_from_collection_for_select(Currency.all.sort, :id, :name, @user.currency_id),
+            { include_blank: true },
+            { class: 'form-control' } %>
+      </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @user.errors[:language_id].empty? %>">
+          <%= form.label :language, t('labels.language'), class: 'control-label' %>
+          <%= form.select :language_id,
+            options_from_collection_for_select(Language.all, :id, :name, @user.language_id),
+            { include_blank: true },
+            { class: 'form-control' } %>
+      </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @user.errors[:time_zone].empty? %>">
+          <%= form.label :time_zone, t('labels.time_zone'), class: 'control-label' %>
+          <%= form.time_zone_select :time_zone,
+            ActiveSupport::TimeZone.all.sort,
+            { include_blank: true },
+            { class: 'form-control' } %>
+      </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <button class="btn btn-default btn-primary" type="submit">
+            <%= t 'buttons.update_settings' %>
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+</div>

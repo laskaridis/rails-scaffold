@@ -119,26 +119,6 @@ describe UsersController do
     end
   end
 
-  describe 'GET #edit' do
-
-    context 'when logged in' do
-      before do
-        login
-        get :edit
-      end
-
-      it { should respond_with :success }
-      it { should render_template :edit }
-      it { should_not set_flash }
-    end
-
-    context 'when not logged in' do
-      before { get :edit }
-
-      it { should redirect_to login_url }
-    end
-  end
-
   describe "PUT #update_profile" do
     before { @user = login }
 
@@ -162,7 +142,7 @@ describe UsersController do
         expect(user.receive_email_notifications).to eq @user.receive_email_notifications
       end
 
-      it { should redirect_to edit_user_path }
+      it { should redirect_to user_profile_path }
       it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
 
     end
@@ -205,7 +185,7 @@ describe UsersController do
         expect(user.receive_email_notifications).to eq @user.receive_email_notifications
       end
 
-      it { should redirect_to edit_user_path }
+      it { should redirect_to user_settings_path }
       it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
     end
 
@@ -246,7 +226,7 @@ describe UsersController do
         expect(user.receive_email_notifications).to eq @new_params[:receive_email_notifications]
       end
 
-      it { should redirect_to edit_user_path }
+      it { should redirect_to user_preferences_path }
       it { expect(flash[:success]).to eq I18n.t('successes.profile_updated') }
     end
 

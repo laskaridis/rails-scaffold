@@ -1,0 +1,40 @@
+<div class="container">
+<div class="row">
+  <div class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation">
+        <%= link_to "Profile", user_profile_path %>
+      </li>
+      <li role="presentation">
+        <%= link_to "Settings", user_settings_path %>
+      </li>
+      <li role="presentation" class="active">
+        <%= link_to "Preferences", user_preferences_path %>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-9">
+    <%= form_for @user, method: :put, url: update_user_preferences_path do |form| %>
+      <legend><%= t 'edit_preferences' %></legend>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="newsletter">
+              <%= form.check_box :receive_email_notifications %>
+              <%= t 'labels.newsletter' %>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <button class="btn btn-default btn-primary" type="submit">
+            <%= t 'buttons.update_preferences' %>
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+</div>

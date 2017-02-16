@@ -1,0 +1,65 @@
+<div class="container">
+<div class="row">
+  <div class="col-sm-3">
+    <%= render "menu", selected: "profile" %>
+  </div>
+  <div class="col-sm-9">
+    <%= form_for @user, method: :put, url: update_user_profile_path do |form| %>
+      <legend><%= t 'edit_profile' %></legend>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @user.errors[:full_name].empty? %>">
+          <%= form.label :full_name, t('labels.full_name'), class: 'control-label' %>
+          <%= form.text_field :full_name,
+            class: 'form-control',
+            placeholder: t('placeholders.full_name'),
+            autofocus: true %>
+      </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @user.errors[:gender].empty? %>">
+          <%= form.label :gender, t('labels.gender'), class: 'control-label' %>
+          <%= form.select :gender,
+            [['Male', t('male')], ['Female', t('female')]],
+            { include_blank: true },
+            { class: 'form-control' } %>
+      </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group <%= 'has-error' unless @user.errors[:birth_date].empty? %>">
+          <%= form.label :birth_date, t('labels.birth_date'), class: 'control-label' %>
+          <%= form.date_select :birth_date, {
+            start_year: Date.current.year - 100,
+            end_year: Date.current.year - 18,
+            use_month_names: [
+              t('january'),
+              t('february'),
+              t('march'),
+              t('april'),
+              t('may'),
+              t('june'),
+              t('july'),
+              t('august'),
+              t('september'),
+              t('october'),
+              t('november'),
+              t('december')
+            ],
+            prompt: {
+              day: t('labels.birth_date_day'),
+              month: t('labels.birth_date_month'),
+              year: t('labels.birth_date_year')
+            },
+          }, { class: 'form-control' } %>
+      </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <button class="btn btn-default btn-primary" type="submit">
+            <%= t 'buttons.update_profile' %>
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+</div>
