@@ -40,15 +40,24 @@ class MessagesController < ApplicationController
   private
 
   def sent
-    @messages = Message.sent_by(current_user)
+    @messages = Message.
+      sent_by(current_user).
+      includes(:recipient).
+      order(created_at: :desc)
   end
 
   def received
-    @messages = Message.received_by(current_user)
+    @messages = Message.
+      received_by(current_user).
+      includes(:recipient).
+      order(created_at: :desc)
   end
 
   def unread
-    @messages = Message.received_by(current_user).unread
+    @messages = Message.
+      received_by(current_user).unread.
+      includes(:recipient).
+      order(created_at: :desc)
   end
 
   def spam
