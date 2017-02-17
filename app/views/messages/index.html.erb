@@ -13,7 +13,7 @@
       </theader>
       <tbody id="messages">
         <% @messages.each do |message| %>
-          <tr>
+          <tr class="<%= 'unread' unless message.read? %>">
             <td><%= message.recipient.full_name %></td>
             <td><%= message.subject %></td>
             <td><%= l message.created_at %></td>

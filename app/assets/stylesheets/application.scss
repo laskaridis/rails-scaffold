@@ -9,6 +9,12 @@ $brand-primary: #71b160;
 
 $success: #15CD72;
 
+tr.unread {
+  td {
+    font-weight: bold;
+  }
+}
+
 .alert {
   border: 0;
   border-radius: 0;
