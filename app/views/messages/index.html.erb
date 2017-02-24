@@ -7,6 +7,7 @@
   <div class="col-sm-9">
     <table class="table">
       <theader>
+        <th></th>
         <th>Recipient</th>
         <th>Subject</th>
         <th>Sent</th>
@@ -14,6 +15,7 @@
       <tbody id="messages">
         <% @messages.each do |message| %>
           <tr class="<%= 'unread' unless message.read? %>">
+            <td><%= check_box_tag "message_ids[]", message.id %></td>
             <td><%= message.recipient.full_name %></td>
             <td><%= message.subject %></td>
             <td><%= l message.created_at %></td>

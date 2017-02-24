@@ -14,17 +14,16 @@ class MessagesController < ApplicationController
 
   # POST /user/messages
   def create
-    message = Message.new(message_params)
-    message.recipient = current_user
-    message.sender = current_user
+    @message = Message.new(message_params)
+    @message.recipient = current_user
+    @message.sender = current_user
+    @message.read = true
     
     respond_to do |format|
-      if message.save
-        flash[:success] = "Your message has been sent"
-        format.json { render json: message.to_json(include: {
-          recipient: { only: :full_name } }, only: [:subject, :message, :created_at]), status: :created }
+      if @message.save
+        format.json {}
       else
-        format.json { render json: message.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -1,0 +1,6 @@
+{
+  "id": <%= @message.id %>,
+  "recipient": "<%= @message.recipient.full_name %>",
+  "subject": "<%= @message.subject %>",
+  "created_at": "<%= l @message.created_at %>"
+}
