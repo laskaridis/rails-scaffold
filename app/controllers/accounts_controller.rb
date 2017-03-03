@@ -3,15 +3,27 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def edit
-    @account = ChangePasswordForm.new current_user
   end
 
   # PUT /accounts/change_password
   def change_password
-    @account = ChangePasswordForm.new current_user
-    if @account.perform change_password_params
+    @change_password_form = ChangePasswordForm.new current_user
+    if @change_password_form.perform change_password_params
       flash[:success] = I18n.t("successes.password_changed")
       redirect_to user_account_path
+    else
+      render :edit
+    end
+  end
+
+  # DELETE /accounts
+  def destroy
+    @delete_account_form = DeleteAccountForm.new(current_user)
+
+    if @delete_account_form.perform(delete_account_params)
+      flash[:success] = "Your account has been deleted"
+      logout
+      redirect_to root_path
     else
       render :edit
     end
@@ -25,5 +37,9 @@ class AccountsController < ApplicationController
       :password,
       :password_confirmation
     )
+  end
+
+  def delete_account_params
+    params.fetch(:delete_account_form, {}).permit(:email)
   end
 end

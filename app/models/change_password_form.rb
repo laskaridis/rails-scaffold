@@ -13,7 +13,7 @@ class ChangePasswordForm
     @user = user
   end
 
-  def perform(params)
+  def perform(params = {})
     self.old_password = params[:old_password]
     self.password = params[:password]
     self.password_confirmation = params[:password_confirmation]
