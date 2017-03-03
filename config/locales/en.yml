@@ -35,9 +35,6 @@ en:
     and: and
     time_zone: Time zone
     birth_date: Birth date
-    birth_date_day: Day
-    birth_date_month: Month
-    birth_date_year: Year
     country: Country
     currency: Currency
     language: Language
@@ -48,6 +45,10 @@ en:
     full_name: Full name
     email: Email address
     password: Password
+    gender: Rather not say
+    day: Day
+    month: Month
+    year: Year
   buttons:
     register: Register
     login: Login

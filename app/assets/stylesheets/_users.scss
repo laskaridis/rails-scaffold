@@ -1,0 +1,11 @@
+
+
+.date_picker {
+
+  @media (min-width: $screen-sm-min) {
+    select {
+      display: inline-block;
+      width: auto;
+    }
+  }
+}
