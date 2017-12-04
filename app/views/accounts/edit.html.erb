@@ -17,6 +17,8 @@
     </ul>
   </div>
   <div class="col-sm-9">
+
+    <div class="row">
     <%= form_for @change_password_form ||= ChangePasswordForm.new(current_user),
       method: :put,
       url: change_password_path do |form| %>
@@ -70,16 +72,18 @@
         </div>
       </div>
     <% end %>
+    </div>
 
+    <div class="row">
     <%= form_for @delete_account_form ||= DeleteAccountForm.new(current_user),
       method: :delete,
       url: delete_account_path do |form| %>
 
       <legend><%= t "headings.delete_account" %></legend>
 
+      <p class="text-danger"><%= t "labels.delete_account" %></p>
       <div class="col-sm-7">
         <div class="form-group <%= 'has-error' unless @delete_account_form.errors[:email].empty? %>">
-          <p class="text-danger"><%= t "labels.delete_account" %></p>
 
           <%= form.label :email, t('labels.email'), class: 'control-label' %>
           <%= form.email_field :email, class: 'form-control', autofocus: true %>
@@ -100,6 +104,8 @@
         </div>
       </div>
     <% end %>
+    </div>
   </div>
+</div>
 </div>
 </div>
