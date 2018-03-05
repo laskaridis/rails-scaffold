@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20180305124300) do
 
   create_table "product_families", force: :cascade do |t|
     t.string "name"
+    t.string "unique"
     t.integer "product_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 20180305124300) do
 
   create_table "product_varieties", force: :cascade do |t|
     t.string "name"
+    t.string "unique"
     t.integer "product_family_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
