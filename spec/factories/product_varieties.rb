@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :product_variety, aliases: [:fuji] do
-    association :product_family, factory: :apple, strategy: :build
+    association :product_family
     name "Fuji"
   end
 end
