@@ -31,7 +31,7 @@ end
 
 group :test do
   gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 3.1'
+  gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
