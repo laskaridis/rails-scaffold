@@ -1,7 +1,7 @@
 class CreateProductFamilies < ActiveRecord::Migration[5.1]
   def change
     create_table :product_families do |t|
-      t.string :name, :unique
+      t.string :name, null: false
       t.references :product_category, foreign_key: true
 
       t.timestamps
