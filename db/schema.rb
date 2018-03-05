@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305125648) do
+ActiveRecord::Schema.define(version: 20180305140358) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street", null: false
@@ -60,16 +60,20 @@ ActiveRecord::Schema.define(version: 20180305125648) do
     t.index ["code"], name: "index_languages_on_code", unique: true
   end
 
+  create_table "legal_entity_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "product_categories", force: :cascade do |t|
-    t.string "name"
-    t.string "unique"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "product_families", force: :cascade do |t|
-    t.string "name"
-    t.string "unique"
+    t.string "name", null: false
     t.integer "product_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -77,8 +81,7 @@ ActiveRecord::Schema.define(version: 20180305125648) do
   end
 
   create_table "product_varieties", force: :cascade do |t|
-    t.string "name"
-    t.string "unique"
+    t.string "name", null: false
     t.integer "product_family_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
