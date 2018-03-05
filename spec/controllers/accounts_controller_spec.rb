@@ -31,7 +31,7 @@ describe AccountsController do
 
       context 'with valid attribites' do
         before do
-          put :change_password, { change_password_form: {
+          put :change_password, params: { change_password_form: {
             old_password: "password",
             password: "new_password",
             password_confirmation: "new_password" }
@@ -49,7 +49,7 @@ describe AccountsController do
 
       context 'with invalid attribites' do
         before do
-          put :change_password, { change_password_form: {
+          put :change_password, params: { change_password_form: {
             old_password: "password",
             password: "new_password",
             password_confirmation: "invalid" }
@@ -82,7 +82,7 @@ describe AccountsController do
 
       context "and valid parameters" do
         before do
-          delete :destroy, delete_account_form: { email: @user.email }
+          delete :destroy, params: { delete_account_form: { email: @user.email } }
         end
 
         it { should redirect_to root_path }
@@ -95,7 +95,7 @@ describe AccountsController do
 
       context "and invalid parameters" do
         before do
-          delete :destroy, delete_account_form: { email: "invalid@localhost" }
+          delete :destroy, params: { delete_account_form: { email: "invalid@localhost" } }
         end
 
         it { should render_template :edit }

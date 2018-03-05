@@ -27,7 +27,7 @@ describe UsersController do
       context 'with valid attributes' do
         before do
           user_attributes = FactoryGirl.attributes_for(:user)
-          post :create, user: user_attributes
+          post :create, params: { user: user_attributes }
         end
 
         it 'redirects to storefront url' do
@@ -63,7 +63,7 @@ describe UsersController do
     context 'when user is logged in' do
       before do
         login
-        post :create, user: {}
+        post :create, params: { user: {} }
       end
 
       it { should redirect_to root_url }
@@ -75,7 +75,7 @@ describe UsersController do
     context 'when no user cannot be found' do
 
       it 'raises an error' do
-        expect { get :verify, token: 'invalid' }.to raise_error ActiveRecord::RecordNotFound
+        expect { get :verify, params: { token: 'invalid' }}.to raise_error ActiveRecord::RecordNotFound
       end
     end
 
@@ -84,7 +84,7 @@ describe UsersController do
         @user = create(:user)
         expect(@user).to_not be_email_confirmation_expired
         expect(@user).to_not be_email_confirmed
-        get :verify, token: @user.email_confirmation_token
+        get :verify, params: { token: @user.email_confirmation_token }
       end
 
       it 'verifies user email' do
@@ -98,7 +98,7 @@ describe UsersController do
       before do
         @user = create_user_with_expired_token
         @old_token = @user.email_confirmation_token
-        get :verify, token: @user.email_confirmation_token
+        get :verify, params: { token: @user.email_confirmation_token }
       end
 
       def create_user_with_expired_token
@@ -128,7 +128,7 @@ describe UsersController do
           full_name: 'New Name',
           gender: 'Male'
         }
-        put :update_profile, user: @new_params
+        put :update_profile, params: { user: @new_params }
       end
 
       it 'updates user' do
@@ -149,7 +149,7 @@ describe UsersController do
 
     context 'when parameters are invalid' do
       before do
-        put :update_profile, user: { }
+        put :update_profile, params: { user: { } }
       end
 
       it 'should not update user' do
@@ -171,7 +171,7 @@ describe UsersController do
           language_id: create(:english).id,
           time_zone: 'Athens',
         }
-        put :update_settings, user: @new_params
+        put :update_settings, params: { user: @new_params }
       end
 
       it 'updates user' do
@@ -191,7 +191,7 @@ describe UsersController do
 
     context 'when parameters are invalid' do
       before do
-        put :update_settings, user: { }
+        put :update_settings, params: { user: { } }
       end
 
       it 'should not update user' do
@@ -212,7 +212,7 @@ describe UsersController do
         @new_params = {
           receive_email_notifications: !@user.receive_email_notifications
         }
-        put :update_preferences, user: @new_params
+        put :update_preferences, params: { user: @new_params }
       end
 
       it 'updates user' do
@@ -232,7 +232,7 @@ describe UsersController do
 
     context 'when parameters are invalid' do
       before do
-        put :update_preferences, user: { }
+        put :update_preferences, params: { user: { } }
       end
 
       it 'should not update user' do

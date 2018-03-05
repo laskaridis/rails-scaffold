@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :redirect_logged_in_users, only: [:create, :new]
+  before_action :redirect_logged_in_users, only: [:create, :new]
   before_action :require_login, only: [:edit, :update]
 
   # GET /login

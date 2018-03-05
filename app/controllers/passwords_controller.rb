@@ -2,7 +2,6 @@ class PasswordsController < ApplicationController
 
   # GET /passwords/new
   def new
-
   end
 
   # POST /passwords
@@ -71,15 +70,19 @@ class PasswordsController < ApplicationController
   end
 
   def find_user_for_edit
-    User.find_by_id_and_password_change_token params[:id], params[:token]
+    User.find_by_id_and_password_change_token user_params[:id], user_params[:token]
   end
 
   def find_user_for_update
-    User.find_by_id_and_password_change_token params[:id], params[:token]
+    User.find_by_id_and_password_change_token user_params[:id], user_params[:token]
   end
 
   def password_params
-    params[:password] || {}
+    params.require(:password).permit([:password, :email]).to_h
+  end
+
+  def user_params
+    params.permit([:id, :token]).to_h
   end
 
   def normalized_email_from_params

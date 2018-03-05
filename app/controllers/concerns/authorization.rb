@@ -1,10 +1,6 @@
 module Authorization
   extend ActiveSupport::Concern
 
-  included do
-    hide_action :deny_access, :require_login
-  end
-
   def require_login
     unless logged_in?
       deny_access

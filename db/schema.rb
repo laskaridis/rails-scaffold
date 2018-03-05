@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -14,67 +13,65 @@
 ActiveRecord::Schema.define(version: 20150814085842) do
 
   create_table "countries", force: :cascade do |t|
-    t.string   "code",       limit: 2, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "code", limit: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_countries_on_code", unique: true
   end
-
-  add_index "countries", ["code"], name: "index_countries_on_code", unique: true
 
   create_table "currencies", force: :cascade do |t|
-    t.string   "code",       limit: 3, null: false
-    t.string   "symbol",     limit: 3, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "code", limit: 3, null: false
+    t.string "symbol", limit: 3, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_currencies_on_code", unique: true
   end
 
-  add_index "currencies", ["code"], name: "index_currencies_on_code", unique: true
-
   create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
+    t.string "locked_by"
+    t.string "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "languages", force: :cascade do |t|
-    t.string   "code",       limit: 2, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "code", limit: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_languages_on_code", unique: true
   end
-
-  add_index "languages", ["code"], name: "index_languages_on_code", unique: true
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                                                       null: false
-    t.string   "encrypted_password",              limit: 128,                 null: false
-    t.string   "full_name",                                                   null: false
-    t.string   "email_confirmation_token",        limit: 128
+    t.string "email", null: false
+    t.string "encrypted_password", limit: 128, null: false
+    t.string "full_name", null: false
+    t.string "email_confirmation_token", limit: 128
     t.datetime "email_confirmation_requested_at"
     t.datetime "email_confirmed_at"
-    t.string   "password_change_token",           limit: 128
+    t.string "password_change_token", limit: 128
     t.datetime "password_change_requested_at"
     t.datetime "password_changed_at"
-    t.string   "gender"
+    t.string "gender"
     t.datetime "birth_date"
-    t.string   "time_zone",                                   default: "UTC", null: false
-    t.boolean  "receive_email_notifications",                 default: false
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
-    t.integer  "country_id"
-    t.integer  "currency_id"
-    t.integer  "language_id"
+    t.string "time_zone", default: "UTC", null: false
+    t.boolean "receive_email_notifications", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "country_id"
+    t.integer "currency_id"
+    t.integer "language_id"
+    t.index ["country_id"], name: "index_users_on_country_id"
+    t.index ["currency_id"], name: "index_users_on_currency_id"
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["language_id"], name: "index_users_on_language_id"
   end
-
-  add_index "users", ["email"], name: "index_users_on_email"
 
 end

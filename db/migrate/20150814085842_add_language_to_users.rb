@@ -1,4 +1,4 @@
-class AddLanguageToUsers < ActiveRecord::Migration
+class AddLanguageToUsers < ActiveRecord::Migration[5.1]
   def change
     add_reference :users, :language, foreign_key: true
   end

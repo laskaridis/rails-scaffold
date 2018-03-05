@@ -1,12 +1,9 @@
 class ChangePasswordForm
   include ActiveModel::Model
-
   attr_accessor :old_password, :password, :password_confirmation
-
   validates :old_password, presence: true
   validates :password, presence: true, confirmation: true
   validates :password_confirmation, presence: true
-
   validate :correct_old_password
 
   def initialize(user)

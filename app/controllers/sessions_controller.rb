@@ -1,6 +1,6 @@
 
 class SessionsController < ApplicationController
-  before_filter :redirect_logged_in_users, only: [:new]
+  before_action :redirect_logged_in_users, only: [:new]
 
   # GET /login
   def new
@@ -47,6 +47,6 @@ class SessionsController < ApplicationController
   end
 
   def session_params
-    params[:session] || {}
+    params.require(:session).permit([:email, :password]).to_h
   end
 end

@@ -1,26 +1,14 @@
 require 'bcrypt'
 
-class User < ActiveRecord::Base
-
+class User < ApplicationRecord
   attr_reader :password
-
-  belongs_to :country
-  belongs_to :currency
-  belongs_to :language
-
+  belongs_to :country, optional: true
+  belongs_to :currency, optional: true
+  belongs_to :language, optional: true
   validates :full_name, presence: true
-
-  validates :gender,
-    inclusion: { in: %w(Male Female) },
-    allow_blank: true
-
-  validates :email,
-    presence: true,
-    email: { strict_mode: true },
-    uniqueness: { case_sensitive: true }
-
+  validates :gender, inclusion: { in: %w(Male Female) }, allow_blank: true
+  validates :email, presence: true, email: { strict_mode: true }, uniqueness: { case_sensitive: true }
   validates :password, presence: true, on: :create
-
   before_validation :normalize_email
   after_create :generate_email_confirmation_token
 

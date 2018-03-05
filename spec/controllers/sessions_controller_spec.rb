@@ -1,4 +1,3 @@
-
 describe SessionsController do
 
   describe "GET #new" do
@@ -25,7 +24,7 @@ describe SessionsController do
   describe "POST #create" do
 
     context 'with invalid email' do
-      before { post :create, session: { email: 'invalid', password: 'password' } }
+      before { post :create, params: { session: { email: 'invalid', password: 'password' } } }
 
       it 'renders login page with error' do
         expect(response).to render_template(:new)
@@ -45,7 +44,7 @@ describe SessionsController do
     context 'given a user pending verification' do
       before do
         @user = create(:user)
-        post :create, session: { email: @user.email, password: @user.password }
+        post :create, params: { session: { email: @user.email, password: @user.password } }
       end
 
       it 'should log user' do
@@ -65,7 +64,7 @@ describe SessionsController do
 
       context 'with valid credentials' do
         before do
-          post :create, session: { email: @user.email, password: @user.password }
+          post :create, params: { session: { email: @user.email, password: @user.password } }
         end
 
         it 'sets the user in session' do

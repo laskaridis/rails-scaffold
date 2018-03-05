@@ -3,12 +3,6 @@ module Localization
 
   included do
     before_action :set_locale
-    hide_action(
-      :default_url_options,
-      :set_locale,
-      :locale_from_url_parameters,
-      :locale_from_client
-    )
   end
 
   def default_url_options(options = {})
@@ -16,15 +10,11 @@ module Localization
   end
 
   def set_locale
-
-    I18n.locale =
-      locale_from_url_parameters ||
-      locale_from_client ||
-      I18n.default_locale
+    I18n.locale = url_parameters[:locale] || locale_from_client || I18n.default_locale
   end
 
-  def locale_from_url_parameters
-    params[:locale]
+  def url_parameters
+    params.permit([:locale]).to_h
   end
 
   def locale_from_client

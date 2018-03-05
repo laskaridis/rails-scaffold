@@ -1,4 +1,3 @@
-
 describe PasswordsController do
 
   describe "#new" do
@@ -15,7 +14,7 @@ describe PasswordsController do
         @user = create(:user)
         expect(@user.password_change_token).to be_nil
         expect(@user.password_change_requested_at).to be_nil
-        post :create, password: {email: @user.email}
+        post :create, params: { password: {email: @user.email} }
         @user.reload
       end
 
@@ -39,7 +38,7 @@ describe PasswordsController do
     end
 
     context "given and email that does not correspond to a registered user" do
-      before { post :create, password: {email: "invalid@domain.com"} }
+      before { post :create, params: { password: {email: "invalid@domain.com"} } }
 
       it { expect(flash[:error]).to include email_not_found_message }
       it { expect(response).to render_template(:new) }
@@ -55,7 +54,7 @@ describe PasswordsController do
     context 'given a non expired password confirmation token' do
       before do
         user = create(:user, :pending_password_change)
-        get :edit, id: user.id, token: user.password_change_token
+        get :edit, params: { id: user.id, token: user.password_change_token }
       end
 
       it { should render_template :edit }
@@ -65,7 +64,7 @@ describe PasswordsController do
     context 'given an expired password confirmation token' do
       before do
         user = create(:user, :with_expired_password_change_token)
-        get :edit, id: user.id, token: user.password_change_token
+        get :edit, params: { id: user.id, token: user.password_change_token }
       end
 
       it { should render_template :new }
@@ -75,7 +74,7 @@ describe PasswordsController do
     context 'given a non existing password confirmation token' do
       before do
         user = create(:user)
-        get :edit, id: user.id, token: 'invalid'
+        get :edit, params: { id: user.id, token: 'invalid' }
       end
 
       it { should redirect_to root_url }
@@ -88,21 +87,22 @@ describe PasswordsController do
     context 'given a non expired password confirmation token' do
       before do
         @user = create(:user, :pending_password_change)
-        put :update, id: @user.id,
-          token: @user.password_change_token,
-          password: { password: "newpassword" }
+        put :update, params: { id: @user.id, token: @user.password_change_token, password: { password: "newpassword" } }
         @user.reload
       end
 
       it "logs user" do
         expect(controller).to be_logged_in
       end
+
       it "changes user password" do
         expect(@user.authenticated? "newpassword").to eq true
       end
+
       it "sets password_changed_at" do
         expect(@user.password_changed_at).to_not be_nil
       end
+
       it { should redirect_to root_url }
       it { should set_flash }
     end
@@ -110,9 +110,7 @@ describe PasswordsController do
     context 'given a non existing password confirmation token' do
       before do
         user = create(:user)
-        put :update, id: user.id,
-          token: 'invalid',
-          password: { password: 'newpassword' }
+        put :update, params: { id: user.id, token: 'invalid', password: { password: 'newpassword' } }
       end
 
       it { should redirect_to root_url }
