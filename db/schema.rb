@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814085842) do
+ActiveRecord::Schema.define(version: 20180305112753) do
 
   create_table "countries", force: :cascade do |t|
     t.string "code", limit: 2, null: false
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 20150814085842) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_languages_on_code", unique: true
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "unique"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
