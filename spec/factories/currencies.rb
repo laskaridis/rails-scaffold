@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :currency do
 

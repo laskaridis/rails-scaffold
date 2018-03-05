@@ -26,7 +26,7 @@ describe UsersController do
     context 'when user is not logged in' do
       context 'with valid attributes' do
         before do
-          user_attributes = FactoryGirl.attributes_for(:user)
+          user_attributes = FactoryBot.attributes_for(:user)
           post :create, params: { user: user_attributes }
         end
 
