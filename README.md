@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/laskaridis/rails-scaffold.svg?branch=master)](https://travis-ci.org/laskaridis/rails-scaffold)
+[![Code Climate](https://codeclimate.com/github/laskaridis/rails-scaffold/badges/gpa.svg)](https://codeclimate.com/github/laskaridis/rails-scaffold)
+
+
 Rails scaffold
 ==============
 
