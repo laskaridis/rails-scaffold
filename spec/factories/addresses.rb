@@ -4,6 +4,6 @@ FactoryBot.define do
     city "Cupertino"
     region "California"
     postal_code "95014"
-    country :united_states
+    association :country
   end
 end
