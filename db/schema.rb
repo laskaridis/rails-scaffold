@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180305144022) do
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.integer "address_id", null: false
+    t.integer "user_id"
     t.string "contact_first_name", null: false
     t.string "contact_last_name", null: false
     t.string "contact_email", null: false
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 20180305144022) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_organizations_on_address_id"
+    t.index ["user_id"], name: "index_organizations_on_user_id"
   end
 
   create_table "product_categories", force: :cascade do |t|
