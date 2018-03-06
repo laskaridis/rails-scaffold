@@ -13,7 +13,6 @@ describe User do
   it { is_expected.not_to allow_value("foo").for(:email) }
   it { is_expected.not_to allow_value("example.com").for(:email) }
   it { is_expected.not_to allow_value("foo;@example.com").for(:email) }
-  it { is_expected.to validate_presence_of :full_name }
   it { is_expected.to validate_inclusion_of(:gender).in_array(%w(Male Female)).allow_blank }
 
   it { is_expected.to belong_to :country }

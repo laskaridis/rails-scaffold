@@ -10,16 +10,6 @@
       <legend><%= t 'edit_profile' %></legend>
 
       <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @user.errors[:full_name].empty? %>">
-          <%= form.label :full_name, t('labels.full_name'), class: 'control-label' %>
-          <%= form.text_field :full_name,
-            class: 'form-control',
-            placeholder: t('placeholders.full_name'),
-            autofocus: true %>
-        </div>
-      </div>
-
-      <div class="col-sm-7">
         <div class="form-group <%= 'has-error' unless @user.errors[:gender].empty? %>">
           <%= form.label :gender, t('labels.gender'), class: 'control-label' %>
           <%= form.select :gender,

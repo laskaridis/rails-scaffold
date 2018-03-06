@@ -124,16 +124,12 @@ describe UsersController do
 
     context "when parameters are valid" do
       before do
-        @new_params = {
-          full_name: 'New Name',
-          gender: 'Male'
-        }
+        @new_params = {gender: 'Male' }
         put :update_profile, params: { user: @new_params }
       end
 
       it 'updates user' do
         user = User.find(@user.id)
-        expect(user.full_name).to eq @new_params[:full_name]
         expect(user.gender).to eq @new_params[:gender]
         expect(user.country).to eq @user.country
         expect(user.currency).to eq @user.currency
@@ -154,7 +150,6 @@ describe UsersController do
 
       it 'should not update user' do
         user = User.find(@user.id)
-        expect(user.full_name).to eq @user.full_name
         expect(user.gender).to eq @user.gender
       end
     end
@@ -176,7 +171,6 @@ describe UsersController do
 
       it 'updates user' do
         user = User.find(@user.id)
-        expect(user.full_name).to eq @user.full_name
         expect(user.gender).to eq @user.gender
         expect(user.country.id).to eq @new_params[:country_id]
         expect(user.currency.id).to eq @new_params[:currency_id]
@@ -217,7 +211,6 @@ describe UsersController do
 
       it 'updates user' do
         user = User.find(@user.id)
-        expect(user.full_name).to eq @user.full_name
         expect(user.gender).to eq @user.gender
         expect(user.country).to eq @user.country
         expect(user.currency).to eq @user.currency

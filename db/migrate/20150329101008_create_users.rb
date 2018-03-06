@@ -3,7 +3,6 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     create_table :users do |t|
       t.string :email, null: false
       t.string :encrypted_password, limit: 128, null: false
-      t.string :full_name, null: false
       t.string :email_confirmation_token, limit: 128
       t.datetime :email_confirmation_requested_at
       t.datetime :email_confirmed_at

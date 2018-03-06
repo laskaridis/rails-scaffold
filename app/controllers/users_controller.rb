@@ -96,11 +96,7 @@ class UsersController < ApplicationController
   private
 
   def user_profile_params
-    params.fetch(:user, {}).permit(
-      :full_name,
-      :gender,
-      :birth_date
-    )
+    params.fetch(:user, {}).permit(:gender, :birth_date)
   end
 
   def user_settings_params
@@ -143,11 +139,6 @@ class UsersController < ApplicationController
   end
 
   def user_params_for_create
-    params.fetch(:user, {}).permit(
-      :full_name,
-      :email,
-      :password,
-      :receive_email_notifications
-    )
+    params.fetch(:user, {}).permit(:email, :password, :receive_email_notifications)
   end
 end

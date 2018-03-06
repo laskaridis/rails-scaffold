@@ -5,7 +5,6 @@ class User < ApplicationRecord
   belongs_to :country, optional: true
   belongs_to :currency, optional: true
   belongs_to :language, optional: true
-  validates :full_name, presence: true
   validates :gender, inclusion: { in: %w(Male Female) }, allow_blank: true
   validates :email, presence: true, email: { strict_mode: true }, uniqueness: { case_sensitive: true }
   validates :password, presence: true, on: :create
