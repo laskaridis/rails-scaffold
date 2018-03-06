@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305144022) do
+ActiveRecord::Schema.define(version: 20180306125920) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street", null: false
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20180305144022) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_addresses_on_country_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -68,17 +76,16 @@ ActiveRecord::Schema.define(version: 20180305144022) do
 
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "address_id", null: false
     t.integer "user_id"
-    t.string "contact_first_name", null: false
-    t.string "contact_last_name", null: false
-    t.string "contact_email", null: false
+    t.integer "address_id"
+    t.integer "contact_id"
     t.string "vat_number", null: false
     t.string "tax_office", null: false
     t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_organizations_on_address_id"
+    t.index ["contact_id"], name: "index_organizations_on_contact_id"
     t.index ["user_id"], name: "index_organizations_on_user_id"
   end
 
