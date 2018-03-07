@@ -12,12 +12,17 @@ class SessionsController < ApplicationController
     user = authenticate(session_params)
 
     if user.present?
-      unless user.email_confirmed?
-        flash[:warning] = pending_email_verification_message
+      if user.email_confirmed?
+        login user
+        if user.organization.nil?
+          redirect_to company_signup_welcome_path
+        else
+          redirect_back_or root_url
+        end
+      else
+        flash.now[:error] = pending_email_verification_message
+        render action: "new", status: :unauthorized
       end
-
-      login user
-      redirect_back_or root_url
     else
       flash.now[:error] = invalid_credentials_message
       render action: "new", status: :unauthorized

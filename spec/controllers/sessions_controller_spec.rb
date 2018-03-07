@@ -26,16 +26,10 @@ describe SessionsController do
     context 'with invalid email' do
       before { post :create, params: { session: { email: 'invalid', password: 'password' } } }
 
-      it 'renders login page with error' do
+      it 'should not log user' do
         expect(response).to render_template(:new)
         expect(flash[:error]).to eq I18n.t('errors.login')
-      end
-
-      it 'should not set the user in session' do
         expect(controller.current_user).to be_nil
-      end
-
-      it 'should not log user' do
         expect(controller).to be_logged_out
         expect(controller).to_not be_logged_in
       end
@@ -47,19 +41,17 @@ describe SessionsController do
         post :create, params: { session: { email: @user.email, password: @user.password } }
       end
 
-      it 'should log user' do
-        expect(controller.current_user).to eq @user
-        expect(controller).to be_logged_in
-      end
-
-      it "should warn user" do
-        expect(flash[:warning]).to eq I18n.t('errors.verify_email.pending')
+      it 'should not log user' do
+        expect(flash[:error]).to eq I18n.t('errors.verify_email.pending')
+        expect(controller.current_user).to be_nil
+        expect(controller).to be_logged_out
+        expect(controller).to_not be_logged_in
       end
     end
 
-    context 'given a verified user' do
+    context 'given a verified user with no company' do
       before do
-        @user = create(:user, :with_confirmed_email)
+        @user = create(:user, :with_no_company, :with_confirmed_email)
       end
 
       context 'with valid credentials' do
@@ -76,7 +68,27 @@ describe SessionsController do
           expect(controller).to_not be_logged_out
         end
         
-        it { should redirect_to root_url }
+        it { should redirect_to company_signup_welcome_path }
+      end
+    end
+
+    context "given a verified user with a company" do
+      before do
+        @user = create(:user, :with_company, :with_confirmed_email)
+      end
+
+      context 'with valid credentials' do
+        before do
+          post :create, params: { session: { email: @user.email, password: @user.password } }
+        end
+
+        it 'logs user' do
+          expect(controller.current_user).to eq @user
+          expect(controller).to be_logged_in
+          expect(controller).to_not be_logged_out
+        end
+        
+        it { should redirect_to root_path }
       end
     end
   end

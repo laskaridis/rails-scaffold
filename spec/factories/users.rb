@@ -32,5 +32,12 @@ FactoryBot.define do
         (expiration_period + 1).hours.ago
       end
     end
+
+    trait :with_company do
+      association :organization
+    end
+
+    trait :with_no_company do
+    end
   end
 end
