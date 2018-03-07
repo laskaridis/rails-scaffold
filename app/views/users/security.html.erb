@@ -3,16 +3,16 @@
   <div class="col-sm-3">
     <ul class="nav nav-pills nav-stacked">
       <li role="presentation">
-        <%= link_to "Profile", user_profile_path %>
+        <%= link_to t('profile'), user_profile_path %>
       </li>
       <li role="presentation">
-        <%= link_to "Settings", user_settings_path %>
+        <%= link_to t('settings'), user_settings_path %>
       </li>
       <li role="presentation">
-        <%= link_to "Preferences", user_preferences_path %>
+        <%= link_to t('preferences'), user_preferences_path %>
       </li>
       <li role="presentation" class="active">
-        <%= link_to "Account", user_account_path %>
+        <%= link_to t('security'), user_security_path %>
       </li>
     </ul>
   </div>
@@ -77,7 +77,7 @@
     <div class="row">
     <%= form_for @delete_account_form ||= DeleteAccountForm.new(current_user),
       method: :delete,
-      url: delete_account_path do |form| %>
+      url: delete_user_path do |form| %>
 
       <legend><%= t "headings.delete_account" %></legend>
 

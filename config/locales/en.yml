@@ -50,15 +50,20 @@ en:
     day: Day
     month: Month
     year: Year
+  account: Account
+  profile: Profile
+  settings: Settings
+  preferences: Preferences
+  account: Account
+  security: Security
   buttons:
+    company: Company
     register: Register
     login: Login
     logout: Logout
     cart: Cart
     change_password: Change my password
     update: Update
-    profile: Profile
-    account: Account
     update_profile: Update profile
     update_settings: Update settings
     update_preferences: Update preferences
