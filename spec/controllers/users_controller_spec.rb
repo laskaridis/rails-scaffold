@@ -90,7 +90,7 @@ describe UsersController do
       it 'verifies user email' do
         expect(@user.reload).to be_email_confirmed
       end
-      it { should redirect_to login_url }
+      it { should redirect_to company_signup_welcome_path }
       it { expect(flash[:success]).to eq I18n.t('successes.verify_email') }
     end
 
