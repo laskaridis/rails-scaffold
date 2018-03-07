@@ -9,6 +9,7 @@ describe Organization do
   it { should validate_presence_of :tax_office }
   it { should accept_nested_attributes_for :address }
   it { should accept_nested_attributes_for :contact }
+  it { should validate_inclusion_of(:size).in_array(%w(1 2-9 10-99 100-299 300+)).allow_blank }
 
   context "factories" do
 

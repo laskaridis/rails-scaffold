@@ -20,6 +20,42 @@
           <span class="help-block"><%= @organization.errors.full_messages_for(:tax_office).first %></span>
         <% end %>
       </div>
+      <div class="form-group <%= 'has-error' unless @organization.errors[:size].empty? %>">
+        <%= form.label :size, 'Choose your company size', class: 'form-label' %>
+        <div class="radio">
+          <label>
+            <%= form.radio_button :size, "0" %>
+            Just you
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= form.radio_button :size, "2-9" %>
+            2-9
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= form.radio_button :size, "10-99" %>
+            10-99
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= form.radio_button :size, "100-299" %>
+            100-299
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= form.radio_button :size, "300+" %>
+            300+
+          </label>
+        </div>
+        <% if @organization.errors[:size].any? %>
+          <span class="help-block"><%= @organization.errors.full_messages_for(:size).first %></span>
+        <% end %>
+      </div>
       <button class="btn btn-primary" type="submit">Next</button>
     <% end %>
   </div>

@@ -73,7 +73,7 @@ class CompanySignupsController < ApplicationController
   private
 
   def params_for_business
-    params.require(:organization).permit(:name, :vat_number, :tax_office)
+    params.require(:organization).permit(:name, :vat_number, :tax_office, :size)
   end
 
   def params_for_address
