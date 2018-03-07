@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <%= form_for @organization, url: :company_signup_address, method: :post, html: {class: 'vertical-form'}  do |form| %>
+      <h1>Where is your business located</h1>
+      <%= fields_for @organization.address do |address_fields| %>
+        <div class="form-group <%= 'has-error' unless @organization.address.errors[:street].empty? %>">
+          <%= address_fields.text_field :street, class: 'form-control', placeholder: 'Street', required: 'required', autofocus: true %>
+          <% if @organization.address.errors[:street].any? %>
+            <span class="help-block"><%= @organization.address.errors.full_messages_for(:street).first %></span>
+          <% end %>
+        </div>
+        <div class="form-group <%= 'has-error' unless @organization.address.errors[:postal_code].empty? %>">
+          <%= address_fields.text_field :postal_code, class: 'form-control', placeholder: 'Postal code', required: 'required' %>
+          <% if @organization.address.errors[:postal_code].any? %>
+            <span class="help-block"><%= @organization.address.errors.full_messages_for(:postal_code).first %></span>
+          <% end %>
+        </div>
+        <div class="form-group <%= 'has-error' unless @organization.address.errors[:city].empty? %>">
+          <%= address_fields.text_field :city, class: 'form-control', placeholder: 'City', required: 'required' %>
+          <% if @organization.address.errors[:city].any? %>
+            <span class="help-block"><%= @organization.address.errors.full_messages_for(:city).first %></span>
+          <% end %>
+        </div>
+        <div class="form-group <%= 'has-error' unless @organization.address.errors[:region].empty? %>">
+          <%= address_fields.text_field :region, class: 'form-control', placeholder: 'Region', required: 'required' %>
+          <% if @organization.address.errors[:region].any? %>
+            <span class="help-block"><%= @organization.address.errors.full_messages_for(:region).first %></span>
+          <% end %>
+        </div>
+        <div class="form-group <%= 'has-error' unless @organization.address.errors[:country].empty? %>">
+          <%= address_fields.select :country_id, options_from_collection_for_select(Country.all.sort, :id, :name, @organization.address.country_id),
+            { include_blank: true }, { class: 'form-control' } %>
+          <% if @organization.address.errors[:country].any? %>
+            <span class="help-block"><%= @organization.address.errors.full_messages_for(:country).first %></span>
+          <% end %>
+        </div>
+      <% end %>
+      <button class="btn btn-primary" type="submit">Next</button>
+    <% end %>
+  </div>
+</div>
