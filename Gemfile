@@ -17,6 +17,7 @@ gem 'kaminari'
 gem 'unicorn'
 gem 'daemons'
 gem 'puma', '~> 3.7'
+gem 'devise'
 
 # gem 'capistrano-rails', group: :development
 
