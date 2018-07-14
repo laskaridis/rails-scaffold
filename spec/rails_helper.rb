@@ -19,6 +19,8 @@ RSpec.configure do |config|
   end
 
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true

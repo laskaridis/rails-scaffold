@@ -39,5 +39,7 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'launchy'
+  gem 'capybara-email'
 end
 

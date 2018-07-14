@@ -11,21 +11,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if flash[:error].present? %>
+  <% if flash[:alert].present? %>
     <div class="alert alert-danger">
-      <p><%= flash[:error] %></p>
+      <p><%= flash[:alert] %></p>
     </div>
   <% end %>
 
-  <% if flash[:warning].present? %>
-    <div class="alert alert-warning">
-      <p><%= flash[:warning] %></p>
-    </div>
-  <% end %>
-
-  <% if flash[:success].present? %>
+  <% if flash[:notice].present? %>
     <div class="alert alert-success">
-      <p><%= flash[:success] %></p>
+      <p><%= flash[:notice] %></p>
     </div>
   <% end %>
 
@@ -43,12 +37,12 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav pull-right">
 
-          <% if logged_out? %>
+          <% if !user_signed_in? %>
             <li role="presentation">
-              <%= link_to t('buttons.register'), register_path %>
+              <%= link_to t('buttons.register'), new_user_registration_path %>
             </li>
             <li role="presentation">
-              <%= link_to t('buttons.login'), login_path %>
+              <%= link_to t('buttons.login'), new_user_session_path %>
             <li>
           <% else %>
             <li class="dropdown">
@@ -63,7 +57,7 @@
                 </li>
                 <li role="separator" class="divider"></li>
                 <li role="presentation">
-                  <%= link_to t('buttons.logout'), logout_path, method: :delete %>
+                  <%= link_to t('buttons.logout'), destroy_user_session_path, method: :delete %>
                 </li>
               </ul>
             </li>

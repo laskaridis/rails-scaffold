@@ -4,15 +4,9 @@ Rails.application.routes.draw do
 
     root 'storefront#index'
 
-    resource :session, only: [:create]
-    get '/login' => 'sessions#new', as: 'login'
-    delete '/logout' => 'sessions#destroy', as: 'logout'
-
-    resources :users, only: [:create, :destroy]
-    get '/register' => 'users#new', as: 'register'
+    devise_for :users
 
     scope '/user' do
-      get '/verify' => 'users#verify', as: 'verify_user'
       get '/profile' => 'users#profile', as: 'user_profile'
       put '/profile' => 'users#update_profile', as: 'update_user_profile'
       get '/settings' => 'users#settings', as: 'user_settings'
@@ -35,9 +29,6 @@ Rails.application.routes.draw do
       post '/contact' => 'company_signups#create_contact'
     end
     
-
-    resources :passwords, only: [:create, :new, :edit, :update]
-
     # Delayed job console available only in development env
     if Rails.env.development?
       match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]

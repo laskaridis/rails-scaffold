@@ -1,0 +1,46 @@
+<div class="container">
+  <h2>Change your password</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |form| %>
+    <%= form.hidden_field :reset_password_token %>
+
+    <div class="form-group <%= 'has-error' unless resource.errors[:password].empty? %>">
+      <%= form.password_field :password,
+        class: "form-control",
+        required: "required",
+        placeholder: t("labels.password"),
+        autocomplete: "off" %>
+
+      <% if resource.errors[:password].any? %>
+        <span class="help-block">
+          <%= resource.errors.full_messages_for(:password).first %>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="form-group <%= 'has-error' if resource.errors.include?(:password_confirmation) %>">
+      <%= form.password_field :password_confirmation,
+        class: "form-control",
+        required: "required",
+        placeholder: t("placeholders.password"),
+        autocomplete: "off" %>
+
+      <% if resource.errors[:password_confirmation].any? %>
+        <span class="help-block">
+          <%= resource.errors.full_messages_for(:password_confirmation).first %>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-default btn-primary" type="submit">
+          Change my password
+      </button>
+    </div>
+
+    <p class="sub-text text-center">
+      <%= render "users/shared/links" %>
+    </p>
+
+  <% end %>
+</div>

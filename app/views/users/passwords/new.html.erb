@@ -1,0 +1,31 @@
+<div class="container">
+
+  <h2>Forgot your password?</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |form| %>
+
+    <div class="form-group <%= 'has-error' if resource.errors.include?(:email) %>">
+      <% if resource.errors.include?(:email) %>
+        <p class="error-text text-center text-danger">
+        <%= resource.errors.full_messages_for(:email).first %></p>
+      <% end %>
+
+      <%= form.email_field :email,
+        class: 'form-control',
+        placeholder: t('placeholders.email'),
+        required: "required",
+        autofocus: true,
+        autocomplete: "email" %>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-default btn-primary" type="submit">
+        Send me reset password instructions
+      </button>
+    </div>
+  <% end %>
+
+  <p class="sub-text text-center">
+    <%= render "users/shared/links" %>
+  </p>
+</div>

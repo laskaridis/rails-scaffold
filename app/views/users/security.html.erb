@@ -19,46 +19,44 @@
   <div class="col-sm-9">
 
     <div class="row">
-    <%= form_for @change_password_form ||= ChangePasswordForm.new(current_user),
-      method: :put,
-      url: change_password_path do |form| %>
+    <%= form_for @user, method: :put, url: change_password_path do |form| %>
 
       <legend><%= t 'change_password' %></legend>
 
       <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @change_password_form.errors[:old_password].empty? %>">
-          <%= form.label :old_password, t('labels.old_password'), class: 'control-label' %>
-          <%= form.password_field :old_password, class: 'form-control', autofocus: true %>
+        <div class="form-group <%= 'has-error' unless @user.errors[:current_password].empty? %>">
+          <%= form.label :current_password, t('labels.old_password'), class: 'control-label' %>
+          <%= form.password_field :current_password, class: 'form-control', autofocus: true %>
 
-          <% if @change_password_form.errors[:old_password].any? %>
+          <% if @user.errors[:current_password].any? %>
             <span class="help-block">
-              <%= @change_password_form.errors.full_messages_for(:old_password).first %>
+              <%= @user.errors.full_messages_for(:current_password).first %>
             </span>
           <% end %>
         </div>
       </div>
 
       <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @change_password_form.errors[:password].empty? %>">
+        <div class="form-group <%= 'has-error' unless @user.errors[:password].empty? %>">
           <%= form.label :password, t('labels.new_password'), class: 'control-label' %>
           <%= form.password_field :password, class: 'form-control', autofocus: true %>
 
-          <% if @change_password_form.errors[:password].any? %>
+          <% if @user.errors[:password].any? %>
             <span class="help-block">
-              <%= @change_password_form.errors.full_messages_for(:password).first %>
+              <%= @user.errors.full_messages_for(:password).first %>
             </span>
           <% end %>
         </div>
       </div>
 
       <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @change_password_form.errors[:password_confirmation].empty? %>">
+        <div class="form-group <%= 'has-error' unless @user.errors[:password_confirmation].empty? %>">
           <%= form.label :password_confirmation, t('labels.new_password_confirm'), class: 'control-label' %>
           <%= form.password_field :password_confirmation, class: 'form-control', autofocus: true %>
 
-          <% if @change_password_form.errors[:password_confirmation].any? %>
+          <% if @user.errors[:password_confirmation].any? %>
             <span class="help-block">
-              <%= @change_password_form.errors.full_messages_for(:password_confirmation).first %>
+              <%= @user.errors.full_messages_for(:password_confirmation).first %>
             </span>
           <% end %>
         </div>

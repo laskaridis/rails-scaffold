@@ -4,10 +4,10 @@ def login
 end
 
 def login_as(user)
-  @controller.login user
-  user
+  sign_in user
+  return user
 end
 
 def logout
-  @controller.logout
+  sign_out
 end

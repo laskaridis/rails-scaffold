@@ -1,23 +1,5 @@
 class UsersController < ApplicationController
-  before_action :redirect_logged_in_users, only: [:create, :new]
-  before_action :require_login, except: [:new, :create, :verify]
-
-  # GET /login
-  def new
-    @user = user_from_params_for_create
-  end
-
-  # POST /users
-  def create
-    @user = user_from_params_for_create
-
-    if @user.save
-      flash[:success] = user_registered_message
-      redirect_to login_url
-    else
-      render "new"
-    end
-  end
+  before_action :authenticate_user!, except: [:new, :create, :verify]
 
   # GET /user/profile
   def profile
@@ -30,7 +12,7 @@ class UsersController < ApplicationController
 
     @user.update_attributes(user_profile_params)
     if @user.save
-      flash[:success] = I18n.t('successes.profile_updated')
+      flash[:notice] = I18n.t('successes.profile_updated')
       redirect_to user_profile_path
     else
       render :profile
@@ -48,7 +30,7 @@ class UsersController < ApplicationController
 
     @user.update_attributes(user_settings_params)
     if @user.save
-      flash[:success] = I18n.t('successes.profile_updated')
+      flash[:notice] = I18n.t('successes.profile_updated')
       redirect_to user_settings_path
     else
       render :settings
@@ -66,7 +48,7 @@ class UsersController < ApplicationController
 
     @user.update_attributes(user_preferences_params)
     if @user.save
-      flash[:success] = I18n.t('successes.profile_updated')
+      flash[:notice] = I18n.t('successes.profile_updated')
       redirect_to user_preferences_path
     else
       render :preferences
@@ -80,9 +62,12 @@ class UsersController < ApplicationController
   #
   # PUT /user/change_password
   def change_password
-    @change_password_form = ChangePasswordForm.new current_user
-    if @change_password_form.perform change_password_params
-      flash[:success] = I18n.t("successes.password_changed")
+    @user = current_user
+
+    if @user.update_with_password(user_password_params)
+      @user.send_email_changed_notification
+      bypass_sign_in(@user)
+      flash[:notice] = I18n.t("successes.password_changed")
       redirect_to user_security_path
     else
       render :security
@@ -154,33 +139,13 @@ class UsersController < ApplicationController
     params.fetch(:user, {}).permit(:receive_email_notifications)
   end
 
-  def user_registered_message
-    I18n.t('successes.user_registered')
-  end
-
-  def verify_email_success_message
-    I18n.t('successes.verify_email')
-  end
-
-  def verify_email_expired_message
-    I18n.t('errors.verify_email.expired')
-  end
-
-  def find_user_by_email_confirmation_token
-    User.find_by_email_confirmation_token! params[:token]
-  end
-
   def redirect_logged_in_users
     if logged_in?
       redirect_to root_url
     end
   end
 
-  def user_from_params_for_create
-    User.new(user_params_for_create)
-  end
-
-  def user_params_for_create
-    params.fetch(:user, {}).permit(:email, :password, :receive_email_notifications)
+  def user_password_params
+    params.fetch(:user, {}).permit(:current_password, :password, :password_confirmation)
   end
 end

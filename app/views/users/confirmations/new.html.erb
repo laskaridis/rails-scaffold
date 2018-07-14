@@ -1,0 +1,33 @@
+<div class="container">
+
+  <h2>Resend confirmation instructions</h2>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |form| %>
+  <div class="form-group <%= 'has-error' if resource.errors.include?(:email) %>">
+    <%= form.email_field :email,
+      class: "form-control",
+      placeholder: t("placeholders.email"),
+      required: "required",
+      autofocus: true,
+      autocomplete: "email",
+      value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+
+      <% if resource.errors[:email].any? %>
+        <span class="help-block">
+          <%= resource.errors.full_messages_for(:email).first %>
+        </span>
+      <% end %>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-default btn-primary" type="submit">
+      Resend confirmation instructions
+    </button>
+  </div>
+
+  <p class="sub-text text-center">
+    <%= render "users/shared/links" %>
+  </p>
+
+<% end %>
+</div>
