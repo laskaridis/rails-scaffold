@@ -76,25 +76,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /verify/:token
-  def verify
-    user = find_user_by_email_confirmation_token
-
-    if user.email_confirmed?
-      redirect_to login_url
-    else
-      if user.confirm_email
-        flash[:success] = verify_email_success_message
-        login user
-        redirect_to company_signup_welcome_path
-      else
-        user.reset_email_confirmation_token
-        flash[:warning] = verify_email_expired_message
-        redirect_to login_url
-      end
-    end
-  end
-
   private
 
   def set_current_user
