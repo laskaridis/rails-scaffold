@@ -5,3 +5,4 @@ Feature: Manage account security
      When I visit my account security
       And I enter a new password 
      Then my password should change successfully
+      And I should receive an email

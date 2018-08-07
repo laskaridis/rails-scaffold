@@ -1,4 +1,5 @@
 When("I visit my account security") do
+  clear_emails
   visit user_security_path
   expect(page).to have_content "Change Password"
 end
@@ -17,4 +18,9 @@ Then("my password should change successfully") do
   fill_in "user_email", with: @user.email
   fill_in "user_password", with: "mynewpassword"
   click_button "Login"
+end
+
+Then("I should receive an email") do
+  open_email(@user.email)
+  expect(current_email.subject).to eq "Password Changed"
 end

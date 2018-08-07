@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     @user = current_user
 
     if @user.update_with_password(user_password_params)
-      @user.send_email_changed_notification
+      @user.send_password_change_notification
       bypass_sign_in(@user)
       flash[:notice] = I18n.t("successes.password_changed")
       redirect_to user_security_path
