@@ -27,6 +27,26 @@ When("I update my time zone") do
   click_button "Update settings"
 end
 
-Then("my settings should be updated successfully") do
+Then("my country should be updated successfully") do
   expect(page).to have_content "Your profle has been updated"
+  visit user_settings_path
+  expect(page).to have_select("Country", selected: "Greece")
+end
+
+Then("my currency should be updated successfully") do
+  expect(page).to have_content "Your profle has been updated"
+  visit user_settings_path
+  expect(page).to have_select("Currency", selected: "Euro")
+end
+
+Then("my language should be updated successfully") do
+  expect(page).to have_content "Your profle has been updated"
+  visit user_settings_path
+  expect(page).to have_select("Language", selected: "English")
+end
+
+Then("my time zone should be updated successfully") do
+  expect(page).to have_content "Your profle has been updated"
+  visit user_settings_path
+  expect(page).to have_select("Time zone", selected: "(GMT+02:00) Athens")
 end

@@ -19,8 +19,18 @@ When("I update my gender") do
   click_button "Update profile"
 end
 
-Then("my profile should be updated successfully") do
+Then("my gender should be updated successfully") do
   expect(page).to have_content "Your profle has been updated"
+  visit user_profile_path
+  expect(page).to have_select("user_gender", selected: "Female")
+end
+
+Then("my birth date should be updated successfully") do
+  expect(page).to have_content "Your profle has been updated"
+  visit user_profile_path
+  expect(page).to have_select("user_birth_date_1i", selected: "2000")
+  expect(page).to have_select("user_birth_date_2i", selected: "January")
+  expect(page).to have_select("user_birth_date_3i", selected: "12")
 end
 
 When("I update my birth date") do
