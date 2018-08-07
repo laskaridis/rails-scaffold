@@ -1,15 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_current_user
 
   # GET /user/profile
   def profile
-    @user = current_user
   end
 
   # PUT /user/profile
   def update_profile
-    @user = current_user
-
     @user.update_attributes(user_profile_params)
     if @user.save
       flash[:notice] = I18n.t('successes.profile_updated')
@@ -21,13 +19,10 @@ class UsersController < ApplicationController
 
   # GET /user/settings
   def settings
-    @user = current_user
   end
 
   # PUT /user/settings
   def update_settings
-    @user = current_user
-
     @user.update_attributes(user_settings_params)
     if @user.save
       flash[:notice] = I18n.t('successes.profile_updated')
@@ -39,13 +34,10 @@ class UsersController < ApplicationController
 
   # GET /user/preferences
   def preferences
-    @user = current_user
   end
 
   # PUT /user/preferences
   def update_preferences
-    @user = current_user
-
     @user.update_attributes(user_preferences_params)
     if @user.save
       flash[:notice] = I18n.t('successes.profile_updated')
@@ -57,13 +49,10 @@ class UsersController < ApplicationController
 
   # GET /user/security
   def security
-    @user = current_user
   end
   #
   # PUT /user/change_password
   def change_password
-    @user = current_user
-
     if @user.update_with_password(user_password_params)
       @user.send_password_change_notification
       bypass_sign_in(@user)
@@ -107,6 +96,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_current_user
+    @user = current_user
+  end
 
   def change_password_params
     params.fetch(:change_password_form, {}).permit(
