@@ -10,6 +10,7 @@ end
 
 Given("I have received a user confirmation email") do
   open_email(@user.email)
+  expect(current_email.subject).to eq "Confirmation instructions"
 end
 
 When("I click on the user confirmation email link") do

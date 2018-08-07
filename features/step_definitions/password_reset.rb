@@ -8,6 +8,7 @@ end
 
 Then("I should receive an password reset email") do
   open_email(@user.email)
+  expect(current_email.subject).to eq "Reset password instructions"
 end
 
 Given("I have received a pasword reset email") do
