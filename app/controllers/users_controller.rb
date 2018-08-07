@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create, :verify]
+  before_action :authenticate_user!
 
   # GET /user/profile
   def profile
