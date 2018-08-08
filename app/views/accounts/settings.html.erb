@@ -4,7 +4,7 @@
     <%= render "menu", selected: "settings" %>
   </div>
   <div class="col-sm-9">
-    <%= form_for @user, method: :put, url: update_user_settings_path do |form| %>
+    <%= form_for @user, method: :put, url: update_account_settings_path do |form| %>
       <legend><%= t 'edit_settings' %></legend>
       <div class="col-sm-7">
         <div class="form-group <%= 'has-error' unless @user.errors[:country_id].empty? %>">

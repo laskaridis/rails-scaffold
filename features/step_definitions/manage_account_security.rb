@@ -1,6 +1,6 @@
 When("I visit my account security") do
   clear_emails
-  visit user_security_path
+  visit account_security_path
   expect(page).to have_content "Change Password"
 end
 

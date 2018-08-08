@@ -1,69 +1,69 @@
-class UsersController < ApplicationController
+class AccountsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user
 
-  # GET /user/profile
+  # GET /account/profile
   def profile
   end
 
-  # PUT /user/profile
+  # PUT /account/profile
   def update_profile
-    @user.update_attributes(user_profile_params)
+    @user.update_attributes(account_profile_params)
     if @user.save
       flash[:notice] = I18n.t('successes.profile_updated')
-      redirect_to user_profile_path
+      redirect_to account_profile_path
     else
       render :profile
     end
   end
 
-  # GET /user/settings
+  # GET /account/settings
   def settings
   end
 
-  # PUT /user/settings
+  # PUT /account/settings
   def update_settings
-    @user.update_attributes(user_settings_params)
+    @user.update_attributes(account_settings_params)
     if @user.save
       flash[:notice] = I18n.t('successes.profile_updated')
-      redirect_to user_settings_path
+      redirect_to account_settings_path
     else
       render :settings
     end
   end
 
-  # GET /user/preferences
+  # GET /account/preferences
   def preferences
   end
 
-  # PUT /user/preferences
+  # PUT /account/preferences
   def update_preferences
-    @user.update_attributes(user_preferences_params)
+    @user.update_attributes(account_preferences_params)
     if @user.save
       flash[:notice] = I18n.t('successes.profile_updated')
-      redirect_to user_preferences_path
+      redirect_to account_preferences_path
     else
       render :preferences
     end
   end
 
-  # GET /user/security
+  # GET /account/security
   def security
   end
   #
-  # PUT /user/change_password
+  # PUT /account/change_password
   def change_password
-    if @user.update_with_password(user_password_params)
+    if @user.update_with_password(account_password_params)
       @user.send_password_change_notification
       bypass_sign_in(@user)
       flash[:notice] = I18n.t("successes.password_changed")
-      redirect_to user_security_path
+      redirect_to account_security_path
     else
       render :security
     end
   end
 
-  # DELETE /user
+  # DELETE /account
   def destroy
     @delete_account_form = DeleteAccountForm.new(current_user)
 
@@ -82,25 +82,17 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def change_password_params
-    params.fetch(:change_password_form, {}).permit(
-      :old_password,
-      :password,
-      :password_confirmation
-    )
-  end
-
   def delete_account_params
     params.fetch(:delete_account_form, {}).permit(:email)
   end
 
   private
 
-  def user_profile_params
+  def account_profile_params
     params.fetch(:user, {}).permit(:gender, :birth_date)
   end
 
-  def user_settings_params
+  def account_settings_params
     params.fetch(:user, {}).permit(
       :country_id,
       :currency_id,
@@ -109,17 +101,11 @@ class UsersController < ApplicationController
     )
   end
 
-  def user_preferences_params
+  def account_preferences_params
     params.fetch(:user, {}).permit(:receive_email_notifications)
   end
 
-  def redirect_logged_in_users
-    if logged_in?
-      redirect_to root_url
-    end
-  end
-
-  def user_password_params
+  def account_password_params
     params.fetch(:user, {}).permit(:current_password, :password, :password_confirmation)
   end
 end
