@@ -1,96 +1,83 @@
 <div class="container">
-<div class="row">
-  <div class="col-sm-3">
-    <%= render "menu", selected: "security" %>
-  </div>
-  <div class="col-sm-9">
-
-    <div class="row">
-    <%= form_for @user, method: :put, url: change_password_path do |form| %>
-
-      <legend><%= t 'change_password' %></legend>
-
-      <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @user.errors[:current_password].empty? %>">
-          <%= form.label :current_password, t('labels.old_password'), class: 'control-label' %>
-          <%= form.password_field :current_password, class: 'form-control', autofocus: true %>
-
-          <% if @user.errors[:current_password].any? %>
-            <span class="help-block">
-              <%= @user.errors.full_messages_for(:current_password).first %>
-            </span>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @user.errors[:password].empty? %>">
-          <%= form.label :password, t('labels.new_password'), class: 'control-label' %>
-          <%= form.password_field :password, class: 'form-control', autofocus: true %>
-
-          <% if @user.errors[:password].any? %>
-            <span class="help-block">
-              <%= @user.errors.full_messages_for(:password).first %>
-            </span>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @user.errors[:password_confirmation].empty? %>">
-          <%= form.label :password_confirmation, t('labels.new_password_confirm'), class: 'control-label' %>
-          <%= form.password_field :password_confirmation, class: 'form-control', autofocus: true %>
-
-          <% if @user.errors[:password_confirmation].any? %>
-            <span class="help-block">
-              <%= @user.errors.full_messages_for(:password_confirmation).first %>
-            </span>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="col-sm-7">
-        <div class="form-group">
-          <button class="btn btn-default btn-primary" type="submit">
-            <%= t "change_password" %>
-          </button>
-        </div>
-      </div>
-    <% end %>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render "menu", selected: "security" %>
     </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <%= form_for @user, method: :put, url: change_password_path do |form| %>
+          <legend><%= t 'change_password' %></legend>
+          <div class="col-sm-7">
+            <div class="form-group <%= 'has-error' unless @user.errors[:current_password].empty? %>">
+              <%= form.label :current_password, t('labels.old_password'), class: 'control-label' %>
+              <%= form.password_field :current_password, class: 'form-control', autofocus: true %>
 
-    <div class="row">
-    <%= form_for @delete_account_form ||= DeleteAccountForm.new(current_user),
-      method: :delete,
-      url: delete_account_path do |form| %>
+              <% if @user.errors[:current_password].any? %>
+                <span class="help-block">
+                  <%= @user.errors.full_messages_for(:current_password).first %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <div class="form-group <%= 'has-error' unless @user.errors[:password].empty? %>">
+              <%= form.label :password, t('labels.new_password'), class: 'control-label' %>
+              <%= form.password_field :password, class: 'form-control', autofocus: true %>
 
-      <legend><%= t "headings.delete_account" %></legend>
+              <% if @user.errors[:password].any? %>
+                <span class="help-block">
+                  <%= @user.errors.full_messages_for(:password).first %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <div class="form-group <%= 'has-error' unless @user.errors[:password_confirmation].empty? %>">
+              <%= form.label :password_confirmation, t('labels.new_password_confirm'), class: 'control-label' %>
+              <%= form.password_field :password_confirmation, class: 'form-control', autofocus: true %>
 
-      <p class="text-danger"><%= t "labels.delete_account" %></p>
-      <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @delete_account_form.errors[:email].empty? %>">
-
-          <%= form.label :email, t('labels.email'), class: 'control-label' %>
-          <%= form.email_field :email, class: 'form-control', autofocus: true %>
-
-          <% if @delete_account_form.errors[:email].any? %>
-            <span class="help-block">
-              <%= @delete_account_form.errors.full_messages_for(:email).first %>
-            </span>
-          <% end %>
-        </div>
+              <% if @user.errors[:password_confirmation].any? %>
+                <span class="help-block">
+                  <%= @user.errors.full_messages_for(:password_confirmation).first %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <div class="form-group">
+              <button class="btn btn-default btn-primary" type="submit">
+                <%= t "change_password" %>
+              </button>
+            </div>
+          </div>
+        <% end %>
       </div>
-
-      <div class="col-sm-7">
-        <div class="form-group">
-          <button class="btn btn-default btn-danger" type="submit">
-            <%= t "buttons.delete_account" %>
-          </button>
-        </div>
+      <div class="row">
+        <%= form_for @delete_account_form ||= DeleteAccountForm.new(current_user),
+          method: :delete,
+          url: delete_account_path do |form| %>
+          <legend><%= t "headings.delete_account" %></legend>
+          <p class="text-danger"><%= t "labels.delete_account" %></p>
+          <div class="col-sm-7">
+            <div class="form-group <%= 'has-error' unless @delete_account_form.errors[:email].empty? %>">
+              <%= form.label :email, t('labels.email'), class: 'control-label' %>
+              <%= form.email_field :email, class: 'form-control', autofocus: true %>
+              <% if @delete_account_form.errors[:email].any? %>
+                <span class="help-block">
+                  <%= @delete_account_form.errors.full_messages_for(:email).first %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <div class="form-group">
+              <button class="btn btn-default btn-danger" type="submit">
+                <%= t "buttons.delete_account" %>
+              </button>
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
     </div>
   </div>
-</div>
-</div>
 </div>

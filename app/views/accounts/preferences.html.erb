@@ -1,31 +1,30 @@
 <div class="container">
-<div class="row">
-  <div class="col-sm-3">
-    <ul class="nav nav-pills nav-stacked">
+  <div class="row">
+    <div class="col-sm-3">
       <%= render "menu", selected: "preferences" %>
-  </div>
-  <div class="col-sm-9">
-    <%= form_for @user, method: :put, url: update_account_preferences_path do |form| %>
-      <legend><%= t 'edit_preferences' %></legend>
-      <div class="col-sm-7">
-        <div class="form-group">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="newsletter">
-              <%= form.check_box :receive_email_notifications %>
-              <%= t 'labels.newsletter' %>
-            </label>
+    </div>
+    <div class="col-sm-9">
+      <%= form_for @user, method: :put, url: update_account_preferences_path do |form| %>
+        <legend><%= t 'edit_preferences' %></legend>
+        <div class="col-sm-7">
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="newsletter">
+                <%= form.check_box :receive_email_notifications %>
+                <%= t 'labels.newsletter' %>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-7">
-        <div class="form-group">
-          <button class="btn btn-default btn-primary" type="submit">
-            <%= t 'buttons.update_preferences' %>
-          </button>
+        <div class="col-sm-7">
+          <div class="form-group">
+            <button class="btn btn-default btn-primary" type="submit">
+              <%= t 'buttons.update_preferences' %>
+            </button>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
 </div>

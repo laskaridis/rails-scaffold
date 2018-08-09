@@ -1,62 +1,58 @@
 <div class="container">
-<div class="row">
-  <div class="col-sm-3">
-    <%= render "menu", selected: "profile" %>
-  </div>
-  <div class="col-sm-9">
-    <%= form_for @user, method: :put, url: update_account_profile_path do |form| %>
-
-      <legend><%= t 'edit_profile' %></legend>
-
-      <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @user.errors[:gender].empty? %>">
-          <%= form.label :gender, t('labels.gender'), class: 'control-label' %>
-          <%= form.select :gender,
-            [['Male', t('male')], ['Female', t('female')]],
-            { include_blank: t("placeholders.gender") },
-            { class: 'form-control' } %>
-        </div>
-      </div>
-
-      <div class="col-sm-7">
-        <div class="form-group <%= 'has-error' unless @user.errors[:birth_date].empty? %>">
-          <%= form.label :birth_date, t('labels.birth_date'), class: 'control-label' %>
-          <div class="date_picker">
-            <%= form.date_select :birth_date, {
-              start_year: Date.current.year - 100,
-              end_year: Date.current.year - 18,
-              use_month_names: [
-                t('january'),
-                t('february'),
-                t('march'),
-                t('april'),
-                t('may'),
-                t('june'),
-                t('july'),
-                t('august'),
-                t('september'),
-                t('october'),
-                t('november'),
-                t('december')
-              ],
-              prompt: {
-                day: t('placeholders.day'),
-                month: t('placeholders.month'),
-                year: t('placeholders.year')
-              },
-            }, { class: 'form-control' } %>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render "menu", selected: "profile" %>
+    </div>
+    <div class="col-sm-9">
+      <%= form_for @user, method: :put, url: update_account_profile_path do |form| %>
+        <legend><%= t 'edit_profile' %></legend>
+        <div class="col-sm-7">
+          <div class="form-group <%= 'has-error' unless @user.errors[:gender].empty? %>">
+            <%= form.label :gender, t('labels.gender'), class: 'control-label' %>
+            <%= form.select :gender,
+              [['Male', t('male')], ['Female', t('female')]],
+              { include_blank: t("placeholders.gender") },
+              { class: 'form-control' } %>
           </div>
         </div>
-      </div>
-
-      <div class="col-sm-7">
-        <div class="form-group">
-          <button class="btn btn-default btn-primary" type="submit">
-            <%= t 'buttons.update_profile' %>
-          </button>
+        <div class="col-sm-7">
+          <div class="form-group <%= 'has-error' unless @user.errors[:birth_date].empty? %>">
+            <%= form.label :birth_date, t('labels.birth_date'), class: 'control-label' %>
+            <div class="date_picker">
+              <%= form.date_select :birth_date, {
+                start_year: Date.current.year - 100,
+                end_year: Date.current.year - 18,
+                use_month_names: [
+                  t('january'),
+                  t('february'),
+                  t('march'),
+                  t('april'),
+                  t('may'),
+                  t('june'),
+                  t('july'),
+                  t('august'),
+                  t('september'),
+                  t('october'),
+                  t('november'),
+                  t('december')
+                ],
+                prompt: {
+                  day: t('placeholders.day'),
+                  month: t('placeholders.month'),
+                  year: t('placeholders.year')
+                },
+              }, { class: 'form-control' } %>
+            </div>
+          </div>
         </div>
-      </div>
-    <% end %>
+        <div class="col-sm-7">
+          <div class="form-group">
+            <button class="btn btn-default btn-primary" type="submit">
+              <%= t 'buttons.update_profile' %>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 </div>
