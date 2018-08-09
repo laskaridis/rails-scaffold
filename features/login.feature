@@ -8,15 +8,18 @@ Feature: Login
     Given a confirmed user
      When I log in with correct credentials 
      Then I should see my home page
+      And I should be logged in
 
   Scenario: Incorrect credentials
     Given a confirmed user
      When I log in with incorrect credentials
      Then I should see a message that my credentials are incorrect
+      And I should not be logged in
 
   Scenario: Unconfirmed user  
     Given an unconfirmed user
      When I log in with correct credentials
      Then I should see a message to confirm my email
+      And I should not be logged in
 
 

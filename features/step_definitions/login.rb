@@ -40,3 +40,10 @@ Then("I should see a message to confirm my email") do
   expect(page).to have_content "You have to confirm your email address before continuing"
 end
 
+Then("I should be logged in") do
+  expect(page).to have_link @user.email
+end
+
+Then("I should not be logged in") do
+  expect(page).to_not have_link @user.email
+end
