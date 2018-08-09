@@ -10,7 +10,7 @@
         <div class="form-group <%= 'has-error' unless @user.errors[:country_id].empty? %>">
           <%= form.label :country_id, t('labels.country'), class: 'control-label' %>
           <%= form.select :country_id,
-            options_from_collection_for_select(Country.all.sort, :id, :name, @user.country_id),
+            country_select_options(@user.country_id),
             { include_blank: true },
             { class: 'form-control' } %>
       </div>
@@ -19,7 +19,7 @@
         <div class="form-group <%= 'has-error' unless @user.errors[:currency_id].empty? %>">
           <%= form.label :currency_id, t('labels.currency'), class: 'control-label' %>
           <%= form.select :currency_id,
-            options_from_collection_for_select(Currency.all.sort, :id, :name, @user.currency_id),
+            currency_select_options(@user.currency_id),
             { include_blank: true },
             { class: 'form-control' } %>
       </div>
@@ -28,7 +28,7 @@
         <div class="form-group <%= 'has-error' unless @user.errors[:language_id].empty? %>">
           <%= form.label :language_id, t('labels.language'), class: 'control-label' %>
           <%= form.select :language_id,
-            options_from_collection_for_select(Language.all, :id, :name, @user.language_id),
+            language_select_options(@user.language_id),
             { include_blank: true },
             { class: 'form-control' } %>
       </div>
