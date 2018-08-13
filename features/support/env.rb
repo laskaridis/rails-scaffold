@@ -60,3 +60,5 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 World(FactoryBot::Syntax::Methods)
 World(Capybara::Email::DSL)
+
+load "#{Rails.root}/db/seeds.rb"

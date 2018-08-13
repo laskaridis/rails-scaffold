@@ -11,12 +11,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
   <% if flash[:alert].present? %>
     <div class="alert alert-danger">
       <p><%= flash[:alert] %></p>
     </div>
   <% end %>
-
   <% if flash[:notice].present? %>
     <div class="alert alert-success">
       <p><%= flash[:notice] %></p>
@@ -36,7 +36,6 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav pull-right">
-
           <% if !user_signed_in? %>
             <li role="presentation">
               <%= link_to t('buttons.register'), new_user_registration_path %>
@@ -69,5 +68,10 @@
 
   <%= yield %>
 
-  </body>
+  <footer>
+    <div class="container">
+      <%= render "localization_settings" %>
+    </div>
+  </footer>
+</body>
 </html>

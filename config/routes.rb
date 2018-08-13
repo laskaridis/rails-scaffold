@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       get '/contact' => 'company_signups#contact', as: 'company_signup_contact'
       post '/contact' => 'company_signups#create_contact'
     end
+
+    resource :localization_settings, only: [ :update ]
     
     # Delayed job console available only in development env
     if Rails.env.development?

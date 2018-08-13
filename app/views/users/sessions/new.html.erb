@@ -1,6 +1,5 @@
 <div id="login" class="container">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
-
     <legend><%= t 'headings.login' %></legend>
 
     <div class="form-group">
@@ -11,7 +10,6 @@
         autofocus: true,
         autocomplete: "email" %>
     </div>
-
     <div class="form-group">
       <%= form.password_field :password,
         class: "form-control",
@@ -19,16 +17,13 @@
         placeholder: t("placeholders.password"),
         autocomplete: "off" %>
     </div>
-
     <div class="form-group">
       <button class="btn btn-primary" type="submit">
         <%= t 'buttons.login' %>
       </button>
     </div>
-
     <p class="text-center">
     <%= render "users/shared/links" %>
     </p>
-
   <% end %>
 </div>

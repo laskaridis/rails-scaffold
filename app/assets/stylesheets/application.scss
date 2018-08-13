@@ -1,6 +1,10 @@
 
 $brand-primary: #71b160;
 
+$border-radius-base: 0px;
+$border-radius-large: 0px;
+$border-radius-small: 0px;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "utilities";

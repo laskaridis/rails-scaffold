@@ -16,4 +16,8 @@ class User < ApplicationRecord
   validates :gender, inclusion: { in: %w(Male Female) }, allow_blank: true
   validates :email, presence: true, email: { strict_mode: true }, uniqueness: { case_sensitive: true }
   validates :password, presence: true, on: :create
+
+  def localization_settings
+    LocalizationSettings.new(country: country, currency: currency, language: language)
+  end
 end
