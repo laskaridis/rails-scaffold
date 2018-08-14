@@ -46,6 +46,7 @@ en:
     full_name: Full name
     email: Email address
     password: Password
+    password_confirmation: Type it again
     gender: Rather not say
     day: Day
     month: Month
