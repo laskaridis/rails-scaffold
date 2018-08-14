@@ -9,7 +9,7 @@ describe Currency do
   describe '#name' do
 
     it 'returns the translated currency name' do
-      expected_name = I18n.t("currencies.#{subject.code}")
+      expected_name = "#{I18n.t("currencies.#{subject.code}")} (#{subject.symbol})"
 
       expect(subject.name).to eq expected_name
     end
