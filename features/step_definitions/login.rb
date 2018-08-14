@@ -47,3 +47,34 @@ end
 Then("I should not be logged in") do
   expect(page).to_not have_link @user.email
 end
+
+Given("a user with a google account") do
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+    provider: "google",
+    uid: "1234567890",
+    info: {
+      email: "test@gmail.com" 
+    },
+    credentials: {
+      token: "abcdef123456",
+      refresh_token: "123456abcdef",
+      expires_at: Time.zone.now
+    }
+  })
+end
+
+When("I visit the login page") do
+  visit new_user_session_path
+end
+
+When("I choose to login with google") do
+  within "#login" do
+    expect(page).to have_link("google_login_link")
+    find("#google_login_link").click
+  end
+end
+
+Then("I should log in sucessfully") do
+  expect(page).to have_content "Successfully authenticated from Google account"
+end

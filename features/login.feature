@@ -22,4 +22,10 @@ Feature: Login
      Then I should see a message to confirm my email
       And I should not be logged in
 
+  Scenario: Login with google account
+    Given a user with a google account
+     When I visit the login page
+      And I choose to login with google
+     Then I should log in sucessfully
+
 

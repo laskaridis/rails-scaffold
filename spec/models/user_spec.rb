@@ -16,6 +16,44 @@ describe User do
   it { should belong_to :currency }
   it { should belong_to :language }
 
+  describe "#from_omniauth" do
+    before do
+      create(:currency, code: "EUR", symbol: "EUR")
+      create(:language, code: "en")
+    end
+
+    context "given an oauth hash" do
+      let(:user) { build(:user) }
+      let(:hash) do
+        OmniAuth::AuthHash.new({
+          provider: "google",
+          uid: "1234567890",
+          info: {
+            email: user.email
+          },
+          credentials: {
+            token: "abcdef123456",
+            refresh_token: "123456abcdef",
+            expires_at: Time.zone.now
+          }
+        })
+      end
+
+      it "should return existing user" do
+        user.save!
+        result = User.from_omniauth(hash)
+        expect(result).to be_persisted
+        expect(result.email).to eq user.email
+      end
+
+      it "should create a non existing user" do
+        result = User.from_omniauth(hash)
+        expect(result).to be_persisted
+        expect(result.email).to eq user.email
+      end
+    end
+  end
+
   describe "user factory" do
 
     it "should build a valid user" do

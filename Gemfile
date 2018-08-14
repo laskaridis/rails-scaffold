@@ -18,6 +18,8 @@ gem 'unicorn'
 gem 'daemons'
 gem 'puma', '~> 3.7'
 gem 'devise'
+gem 'omniauth-google-oauth2'
+gem 'figaro'
 
 # gem 'capistrano-rails', group: :development
 
