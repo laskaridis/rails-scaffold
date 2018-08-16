@@ -46,3 +46,4 @@ group :test do
   gem 'simplecov', require: false
 end
 
+ruby "2.5.1"
