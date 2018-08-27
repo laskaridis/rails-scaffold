@@ -16,7 +16,7 @@ describe User do
   it { should belong_to :currency }
   it { should belong_to :language }
 
-  describe "#from_omniauth" do
+  describe "#find_or_create_from_omniauth" do
     before do
       create(:currency, code: "EUR", symbol: "EUR")
       create(:language, code: "en")
@@ -26,7 +26,7 @@ describe User do
       let(:user) { build(:user) }
       let(:hash) do
         OmniAuth::AuthHash.new({
-          provider: "google",
+          provider: "google_oauth2",
           uid: "1234567890",
           info: {
             email: user.email
@@ -39,17 +39,31 @@ describe User do
         })
       end
 
-      it "should return existing user" do
-        user.save!
-        result = User.from_omniauth(hash)
-        expect(result).to be_persisted
-        expect(result.email).to eq user.email
+      context "when a user by that email exists" do
+        before { user.save! }
+
+        it "should return existing user" do
+          result = User.find_or_create_from_omniauth(hash)
+          expect(result).to be_persisted
+          expect(result.email).to eq user.email
+          expect(result.country).to eq user.country
+          expect(result.currency).to eq user.currency
+          expect(result.language).to eq user.language
+          expect(result.provider).to be_nil
+        end
       end
 
-      it "should create a non existing user" do
-        result = User.from_omniauth(hash)
-        expect(result).to be_persisted
-        expect(result.email).to eq user.email
+      context "when no user by that email exists" do
+
+        it "should create and return a new user" do
+          result = User.find_or_create_from_omniauth(hash)
+          expect(result).to be_persisted
+          expect(result.email).to eq user.email
+          expect(result.country).to be_nil
+          expect(result.currency).to eq Currency.default
+          expect(result.language).to eq Language.default
+          expect(result.provider).to eq "google_oauth2"
+        end
       end
     end
   end

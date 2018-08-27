@@ -51,7 +51,7 @@ end
 Given("a user with a google account") do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    provider: "google",
+    provider: "google_oauth2",
     uid: "1234567890",
     info: {
       email: "test@gmail.com" 

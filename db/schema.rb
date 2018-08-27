@@ -10,26 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_14_095719) do
+ActiveRecord::Schema.define(version: 2018_08_16_111053) do
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "street", null: false
-    t.string "city", null: false
-    t.string "region", null: false
-    t.string "postal_code", null: false
-    t.integer "country_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["country_id"], name: "index_addresses_on_country_id"
-  end
-
-  create_table "contacts", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "countries", force: :cascade do |t|
     t.string "code", limit: 2, null: false
@@ -68,50 +52,6 @@ ActiveRecord::Schema.define(version: 2018_07_14_095719) do
     t.index ["code"], name: "index_languages_on_code", unique: true
   end
 
-  create_table "legal_entity_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "organizations", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "user_id"
-    t.integer "address_id"
-    t.integer "contact_id"
-    t.string "vat_number", null: false
-    t.string "tax_office", null: false
-    t.string "website"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "size"
-    t.index ["address_id"], name: "index_organizations_on_address_id"
-    t.index ["contact_id"], name: "index_organizations_on_contact_id"
-    t.index ["user_id"], name: "index_organizations_on_user_id"
-  end
-
-  create_table "product_categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "product_families", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "product_category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_category_id"], name: "index_product_families_on_product_category_id"
-  end
-
-  create_table "product_varieties", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "product_family_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_family_id"], name: "index_product_varieties_on_product_family_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "encrypted_password", limit: 128, null: false
@@ -121,9 +61,9 @@ ActiveRecord::Schema.define(version: 2018_07_14_095719) do
     t.boolean "receive_email_notifications", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "country_id"
-    t.integer "currency_id"
-    t.integer "language_id"
+    t.bigint "country_id"
+    t.bigint "currency_id"
+    t.bigint "language_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -139,6 +79,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_095719) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.string "provider"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["currency_id"], name: "index_users_on_currency_id"
@@ -148,4 +89,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_095719) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "users", "countries"
+  add_foreign_key "users", "currencies"
+  add_foreign_key "users", "languages"
 end

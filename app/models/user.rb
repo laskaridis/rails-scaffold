@@ -19,8 +19,9 @@ class User < ApplicationRecord
   validates :email, presence: true, email: { strict_mode: true }, uniqueness: { case_sensitive: true }
   validates :password, presence: true, on: :create
 
-  def self.from_omniauth(auth)
+  def self.find_or_create_from_omniauth(auth)
     where(email: auth.info.email).first_or_create do |user|
+      user.provider = auth.provider
       user.password = Devise.friendly_token[0,20]
       user.currency = Currency.default
       user.language = Language.default
