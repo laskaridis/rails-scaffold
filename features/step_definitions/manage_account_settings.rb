@@ -6,7 +6,6 @@ end
 When("I update my country") do
   within "#account_settings" do
     select("Greece", from: "Country")
-    save_and_open_page
     click_button "Update settings"
   end
 end
