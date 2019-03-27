@@ -6,15 +6,12 @@ describe User do
   it { should allow_value("foo@example.com").for(:email) }
   it { should allow_value("foo+bar@example.com").for(:email) }
   it { should_not allow_value("foo@").for(:email) }
-  it { should_not allow_value("foo@example..com").for(:email) }
-  it { should_not allow_value("foo@.example.com").for(:email) }
   it { should_not allow_value("foo").for(:email) }
   it { should_not allow_value("example.com").for(:email) }
-  it { should_not allow_value("foo;@example.com").for(:email) }
   it { should validate_inclusion_of(:gender).in_array(%w(Male Female)).allow_blank }
-  it { should belong_to :country }
-  it { should belong_to :currency }
-  it { should belong_to :language }
+  it { should belong_to(:country).optional }
+  it { should belong_to(:currency).optional }
+  it { should belong_to(:language).optional }
 
   describe "#find_or_create_from_omniauth" do
     before do

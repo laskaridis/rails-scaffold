@@ -1,6 +1,6 @@
 FactoryBot.define do
 
   factory :language, aliases: [:english] do
-    code "en"
+    code { "en" }
   end
 end

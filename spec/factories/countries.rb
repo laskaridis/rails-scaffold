@@ -1,14 +1,14 @@
 FactoryBot.define do
 
   factory :country do
-    code :gr
+    code { :gr }
   end
 
   factory :united_states do
-    code :us
+    code { :us }
   end
 
   factory :greece do
-    code :gr
+    code { :gr }
   end
 end

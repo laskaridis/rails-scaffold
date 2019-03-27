@@ -5,7 +5,7 @@ FactoryBot.define do
 
   factory :user do
     email
-    password 'password'
+    password { 'password' }
 
     trait :with_confirmed_email do
       confirmation_token   { Token.new }

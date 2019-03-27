@@ -5,13 +5,13 @@ FactoryBot.define do
   factory :currency do
 
     factory :eur do
-      code "eur"
-      symbol "€"
+      code { "eur" }
+      symbol { "€" }
     end
 
     factory :usd do
-      code "usd"
-      symbol "$"
+      code { "usd" }
+      symbol { "$" }
     end
   end
 end
