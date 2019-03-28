@@ -22,6 +22,11 @@
         <%= t 'buttons.login' %>
       </button>
     </div>
+    <%- if devise_mapping.omniauthable? %>
+      <div class="form-group text-center">
+        <%= link_to image_tag('1x/btn_google_signin_dark_normal_web.png'), user_google_oauth2_omniauth_authorize_path, id: "google_login_link", alt: "Login with Google" %>
+      </div>
+    <% end -%>
     <p class="text-center">
     <%= render "users/shared/links" %>
     </p>
