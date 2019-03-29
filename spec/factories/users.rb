@@ -18,12 +18,5 @@ FactoryBot.define do
       confirmation_sent_at { DateTime.now }
       confirmed_at         { nil }
     end
-
-    trait :with_company do
-      association :organization
-    end
-
-    trait :with_no_company do
-    end
   end
 end
