@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_111053) do
+ActiveRecord::Schema.define(version: 2019_05_27_130453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 2018_08_16_111053) do
     t.index ["code"], name: "index_languages_on_code", unique: true
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "subject", null: false
+    t.string "type", null: false
+    t.text "body", null: false
+    t.boolean "read"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "encrypted_password", limit: 128, null: false
@@ -89,6 +100,7 @@ ActiveRecord::Schema.define(version: 2018_08_16_111053) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "notifications", "users"
   add_foreign_key "users", "countries"
   add_foreign_key "users", "currencies"
   add_foreign_key "users", "languages"

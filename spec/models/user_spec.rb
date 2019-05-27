@@ -12,6 +12,7 @@ describe User do
   it { should belong_to(:country).optional }
   it { should belong_to(:currency).optional }
   it { should belong_to(:language).optional }
+  it { should have_many(:notifications) }
 
   describe "#find_or_create_from_omniauth" do
     before do

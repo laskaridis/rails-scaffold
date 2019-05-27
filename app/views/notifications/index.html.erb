@@ -1,0 +1,29 @@
+<div id="notifications" class="container">
+  <table class="notifications_listing table">
+    <thead>
+      <th>Type</th>
+      <th>Subject</th>
+      <th>Date</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @notifications.each do |notification| %>
+        <tr id="notification-<%= notification.id %>" class="notification_row" role="button">
+          <td class="type">
+            <span class="glyphicon <%= notification_icon_for(notification) %>" aria-hidden="true"></span>
+          </td>
+          <td class="subject">
+            <h4 class="title">
+              <%= notification.subject %>
+            </h4>
+            <div class="body" style="display: none">
+              <%= notification.body.html_safe %>
+            </div>
+          </td>
+          <td class="created_at"><%= l notification.created_at %></td>
+          <td class="action"></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

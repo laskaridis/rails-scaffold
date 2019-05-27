@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     delete '/account' => 'accounts#destroy', as: 'delete_account'
 
     resource :localization_settings, only: [ :update ]
+    resources :notifications, only: [ :index ]
     
     # Delayed job console available only in development env
     if Rails.env.development?

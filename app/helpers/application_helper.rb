@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def unread_notifications_count
+    Notification.unread.count
+  end
+
+  def user_has_unread_notifications?
+    unread_notifications_count > 0
+  end
+
   def selected_localization_settings
     @localization_settings ||= LocalizationSettings.new(
       country: cached_country(cookies[:country_id]),
