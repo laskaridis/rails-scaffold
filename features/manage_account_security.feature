@@ -1,8 +1,11 @@
 Feature: Manage account security
 
-  Scenario: Change my password
+  Background:
     Given I am logged in
-     When I visit my account security
-      And I enter a new password 
+      And I visit my account security
+
+  Scenario: Change my password successfully
+     When I enter a new password 
      Then my password should change successfully
       And I should receive an email
+
