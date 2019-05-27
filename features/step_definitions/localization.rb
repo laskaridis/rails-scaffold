@@ -1,47 +1,22 @@
 Given("I visit the home page") do
   visit root_path
-end
-
-Given("I have not selected any region") do
-  within "#selected_country" do
-    expect(page).to have_content "-"
-  end
+  @view = LocalizationSettingsPage.new
 end
 
 When("I select region {string}") do |region|
-  within "#localization_settings" do
-    click_button "localization_settings_button"
-  end
-  within "#edit_localization_settings" do
-    select(region, from: "Country")
-    click_button "Save"
-  end
+  @view.select_region(region)
 end
 
 Then("region {string} should be applied") do |region|
-  within "#selected_country" do
-    expect(page).to have_content region
-  end
+  expect(@view.selected_region).to eq region
 end
 
 When("I select language {string}") do |language|
-  within "#localization_settings" do
-    click_button "localization_settings_button"
-  end
-  within "#edit_localization_settings" do
-    select language, from: "Language"
-    click_button "Save"
-  end
+  @view.select_language(language)
 end
 
 When("I select currency {string}") do |currency|
-  within "#localization_settings" do
-    click_button "localization_settings_button"
-  end
-  within "#edit_localization_settings" do
-    select currency, from: "Currency"
-    click_button "Save"
-  end
+  @view.select_currency(currency)
 end
 
 Given("I am a confirmed user") do
@@ -62,9 +37,7 @@ When("I log in") do
 end
 
 Then("currency {string} should be applied") do |currency|
-  within "#selected_currency" do
-    expect(page).to have_content currency
-  end
+  expect(@view.selected_currency).to eq currency
 end
 
 Given("my selected region is {string}") do |country_code|
@@ -76,25 +49,9 @@ Given("my selected language is {string}") do |language_code|
 end
 
 Then("language {string} should be applied") do |language|
-  within "#selected_language" do
-    expect(page).to have_content language
-  end
-end
-
-Given("currency {string} is selected") do |currency|
-  within "#selected_currency" do
-    expect(page).to have_content currency
-  end
-end
-
-Given("language {string} is selected") do |language|
-  within "#selected_language" do
-    expect(page).to have_content language
-  end
+  expect(@view.selected_language).to eq language
 end
 
 Then("country {string} should be applied") do |country|
-  within "#selected_country" do
-    expect(page).to have_content country
-  end
+  expect(@view.selected_region).to eq country
 end

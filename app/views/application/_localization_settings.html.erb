@@ -5,11 +5,13 @@
           data-toggle="modal"
           data-target="#edit_localization_settings">
     <span id="selected_country">
-      <%= selected_localization_settings.country&.name || "-" %> |
+      <%= selected_localization_settings.country&.name || "-" %> 
     </span>
+    |
     <span id="selected_currency">
-      <%= selected_localization_settings.currency.name %> |
+      <%= selected_localization_settings.currency.name %>
     </span>
+    |
     <span id="selected_language">
       <%= selected_localization_settings.language.name %>
     </span>
