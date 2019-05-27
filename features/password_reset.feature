@@ -1,7 +1,7 @@
 Feature: Password reset
 
   Background:
-    Given a confirmed user
+    Given I have confirmed my email 
 
   Scenario: Request password change
      When I request a password reset

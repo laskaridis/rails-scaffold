@@ -1,5 +1,5 @@
 
-Given("a confirmed user") do
+Given("I have confirmed my email") do
   @user = create(:user, :with_confirmed_email, password: "password")
 end
 
@@ -32,7 +32,7 @@ Then("I should see a message that my credentials are incorrect") do
   expect(page).to have_content "Invalid Email or password"
 end
 
-Given("an unconfirmed user") do
+Given("I haven't confirmed my email") do
   @user = create(:user, :with_unconfirmed_email)
 end
 
@@ -48,7 +48,7 @@ Then("I should not be logged in") do
   expect(page).to_not have_link @user.email
 end
 
-Given("a user with a google account") do
+Given("I have a google account") do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
     provider: "google_oauth2",
