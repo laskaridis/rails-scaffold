@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_130453) do
+ActiveRecord::Schema.define(version: 2020_02_14_143003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(version: 2019_05_27_130453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+    t.text "description"
+    t.string "action", limit: 255, null: false
+    t.string "resource", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action", "resource"], name: "index_permissions_on_action_and_resource", unique: true
+    t.index ["name"], name: "index_permissions_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
