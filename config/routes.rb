@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en/ do
 
+    namespace :admin do
+      resources :users
+    end
+
     root 'storefront#index'
 
     devise_for :users, skip: :omniauth_callbacks

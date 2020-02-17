@@ -1,0 +1,33 @@
+<div class="users-list container">
+  <table class="users-table table">
+    <thead>
+      <th>Email</th>
+      <th>Last login</th>
+      <th class="hidden-xs hidden-sm">Logins</th>
+      <th class="hidden-xs hidden-sm">Identity provider</th>
+      <th class="hidden-xs hidden-sm">Confirmed</th>
+      <th class="hidden-xs hidden-sm">Locked</th>
+      <th class="hidden-xs hidden-sm">Country</th>
+      <th class="hidden-xs hidden-sm">Currency</th>
+      <th class="hidden-xs hidden-sm">Language</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr id="user-<%= user.id %>" class="user-row">
+          <td class="user-email"><%= user.email %></td>
+          <td class="user-last_login_at">
+            <%= last_signed_time_for user %>
+            <%= time_since_last_login_for user %>
+          </td>
+          <td class="user-login_count hidden-xs hidden-sm"><%= user.sign_in_count %></td>
+          <td class="user-identity_provider hidden-xs hidden-sm"><%= user.provider %></td>
+          <td class="user-confirmed_at hidden-xs hidden-sm"><%= I18n.l(user.confirmed_at) if user.confirmed_at %></td>
+          <td class="user-locked_at hidden-xs hidden-sm"><%= I18n.l(user.locked_at) if user.locked_at %></td>
+          <td class="user-country hidden-xs hidden-sm"><%= user.country&.name %></td>
+          <td class="user-currency hidden-xs hidden-sm"><%= user.currency&.name %></td>
+          <td class="user-language hidden-xs hidden-sm"><%= user.language&.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

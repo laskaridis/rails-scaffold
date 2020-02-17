@@ -102,3 +102,5 @@ en:
     reset_email_not_found: "Could not find the email that you specified."
     old_password_incorrect: "Your preferences password is incorrect. Please try again."
     delete_account:  "does not match your account email"
+  admin:
+    manage_users: "Manage users"
