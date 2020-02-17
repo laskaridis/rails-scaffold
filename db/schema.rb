@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_14_143003) do
+ActiveRecord::Schema.define(version: 2020_02_17_091021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,20 @@ ActiveRecord::Schema.define(version: 2020_02_14_143003) do
     t.datetime "updated_at", null: false
     t.index ["action", "resource"], name: "index_permissions_on_action_and_resource", unique: true
     t.index ["name"], name: "index_permissions_on_name", unique: true
+  end
+
+  create_table "permissions_roles", force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.integer "permission_id", null: false
+    t.index ["role_id", "permission_id"], name: "index_permissions_roles_on_role_id_and_permission_id", unique: true
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
