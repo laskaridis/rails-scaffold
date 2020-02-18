@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  def display_error_class_for(model, property)
+    unless model.errors[property].empty?
+      'has-error'
+    end
+  end
+
+  def display_error_for(model, property)
+    if model.errors[property].any?
+      tag.span class: "help-block" do
+        model.errors.full_messages_for(property).first
+      end
+    end
+  end
+
   def unread_notifications_count
     Notification.unread.count
   end
