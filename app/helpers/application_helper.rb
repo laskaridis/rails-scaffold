@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def edit_link_class_for(model)
+    "edit-#{model.class.name.downcase}-#{model.id}"
+  end
+
   def display_error_class_for(model, property)
     unless model.errors[property].empty?
       'has-error'

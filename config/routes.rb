@@ -8,6 +8,12 @@ Rails.application.routes.draw do
       resources :users
     end
 
+    scope '/admin' do
+      resources :roles do
+        resources :permissions, only: [ :index ]
+      end
+    end
+
     root 'storefront#index'
 
     devise_for :users, skip: :omniauth_callbacks

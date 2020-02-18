@@ -1,0 +1,35 @@
+<div id="permissions" class="container">
+
+  <h1>Permissions</h1>
+
+  <%= render 'search' %>
+
+  <%= form_with(url: role_path(params[:role_id]), method: :put) do |form| %>
+    <table class="permissions-list table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Resource</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% permissions.each do |permission| %>
+          <tr id="permission-<%= permission.id %>">
+            <td>
+              <%= check_box_tag "role[permission_ids][]", permission.id, @role.permission_ids.include?(permission.id) %>
+            </td>
+            <td class="permission-name"><%= permission.name %></td>
+            <td class="permission-resource"><%= permission.resource %></td>
+            <td class="permission-action"><%= permission.action %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to "Cancel", edit_role_path(params[:role_id]), class: "btn btn-default" %>
+    <%= form.submit "Add permissions", class: "btn btn-primary "%>
+  <% end %>
+</div>

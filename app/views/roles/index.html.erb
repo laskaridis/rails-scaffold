@@ -1,0 +1,28 @@
+<div id="permissions" class="container">
+
+  <h1>Roles</h1>
+
+  <table class="permissions-list table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @roles.each do |role| %>
+        <tr id="role-<%= role.id %>">
+          <td class="role-name"><%= link_to role.name, edit_role_path(role), class: edit_link_class_for(role) %>
+          <td class="role-description"><%= role.description %></td>
+          <td>
+            <%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'New Role', new_role_path , class: "btn btn-primary" %>
+</div>

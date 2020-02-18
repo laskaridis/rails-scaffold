@@ -25,4 +25,14 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe "#edit_link_class_for" do
+    subject do
+      create :permission
+    end
+
+    it "should return `edit-model-id`" do
+      expect(edit_link_class_for(subject)).to eq "edit-#{subject.class.name.downcase}-#{subject.id}"
+    end
+  end
 end

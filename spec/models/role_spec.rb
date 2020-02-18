@@ -4,6 +4,7 @@ describe Role do
   it { should have_db_index(:name).unique }
   it { should validate_length_of(:name).is_at_most(255) }
   it { should have_and_belong_to_many(:permissions) }
+  it { should accept_nested_attributes_for(:permissions) }
 
   context "given an existing role" do
     before do

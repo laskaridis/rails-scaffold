@@ -1,0 +1,41 @@
+<div class="container">
+  <%= form_with(model: role, local: true) do |form| %>
+    <div class="col-sm-7">
+      <div class="form-group <%= display_error_class_for(role, :name) %>">
+        <%= form.label :name, class: "control-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+        <%= display_error_for role, :name %>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-group <%= display_error_class_for(role, :description) %>">
+        <%= form.label :description, class: "control-label" %>
+        <%= form.text_field :description, class: "form-control" %>
+        <%= display_error_for role, :description %>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-group <%= display_error_class_for(role, :permissions) %>">
+        <%= form.label :permissions, class: "control-label" %>
+      </div>
+    </div>
+    <% if role.persisted? %>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <ul>
+            <% role.permissions.each do |permission| %>
+              <li><%= permission.name %> <%= permission.resource %>:<%= permission.action %></li>
+            <% end %>
+          </ul>
+          <%= link_to "Manage permissions", role_permissions_path(role), class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-sm-7">
+      <div class="form-group">
+        <%= link_to 'Back', roles_path, class: "btn btn-default" %>
+        <%= form.submit class: "btn btn-default btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

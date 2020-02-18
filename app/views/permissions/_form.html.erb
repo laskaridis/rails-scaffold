@@ -1,0 +1,39 @@
+<div class="container">
+  <%= form_with(model: permission, local: true) do |form| %>
+    <legend>Permission</legend>
+    <div class="col-sm-7">
+      <div class="form-group <%= display_error_class_for(permission, :name) %>">
+        <%= form.label :name, class: "control-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+        <%= display_error_for permission, :name %>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-group <%= display_error_class_for(permission, :description) %>">
+        <%= form.label :description, class: "control-label" %>
+        <%= form.text_field :description, class: "form-control" %>
+        <%= display_error_for permission, :description %>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-group <%= display_error_class_for(permission, :resource) %>">
+        <%= form.label :resource, class: "control-label" %>
+        <%= form.text_field :resource, class: "form-control" %>
+        <%= display_error_for permission, :resource %>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-group <%= display_error_class_for(permission, :action) %>">
+        <%= form.label :action, class: "control-label" %>
+        <%= form.text_field :action, class: "form-control" %>
+        <%= display_error_for permission, :action %>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-group">
+        <%= link_to 'Back', permissions_path, class: "btn btn-default" %>
+        <%= form.submit class: "btn btn-default btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
